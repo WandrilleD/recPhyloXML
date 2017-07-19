@@ -1,0 +1,34 @@
+<recGeneTree>
+  <phylogeny rooted="true">
+    <clade>
+      <name>G4_5</name>
+      <eventsRec>
+        <speciation speciesLocation="5"></speciation>
+      </eventsRec>
+      <clade>
+        <name>G2_3</name>
+        <eventsRec>
+          <speciation speciesLocation="3"></speciation>
+        </eventsRec>
+        <clade>
+          <name>G0_1</name>
+          <eventsRec>
+            <leaf speciesLocation="1" geneName="G0_1"></leaf>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>G1_2</name>
+          <eventsRec>
+            <leaf speciesLocation="2" geneName="G1_2"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+      <clade>
+        <name>G3_4</name>
+        <eventsRec>
+          <leaf speciesLocation="4" geneName="G3_4"></leaf>
+        </eventsRec>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>

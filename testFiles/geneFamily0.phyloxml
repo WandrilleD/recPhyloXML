@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<recGeneTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="../recxml.xsd">
+  <phylogeny rooted="true">
+    <clade>
+      <name>0</name>
+      <eventsRec>
+        <duplication speciesLocation="98"></duplication>
+      </eventsRec>
+      <clade>
+        <name>1</name>
+        <eventsRec>
+          <duplication speciesLocation="98"></duplication>
+        </eventsRec>
+        <clade>
+          <name>3</name>
+          <eventsRec>
+            <speciationLoss speciesLocation="98"></speciationLoss>
+            <speciationLoss speciesLocation="56"></speciationLoss>
+            <speciationLoss speciesLocation="54"></speciationLoss>
+            <speciationLoss speciesLocation="38"></speciationLoss>
+            <speciationLoss speciesLocation="37"></speciationLoss>
+            <speciationLoss speciesLocation="36"></speciationLoss>
+            <leaf speciesLocation="32" geneName="14_0.0"></leaf>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>4</name>
+          <eventsRec>
+            <duplication speciesLocation="98"></duplication>
+          </eventsRec>
+          <clade>
+            <name>19</name>
+            <eventsRec>
+              <duplication speciesLocation="98"></duplication>
+            </eventsRec>
+            <clade>
+              <name>27</name>
+              <eventsRec>
+                <duplication speciesLocation="98"></duplication>
+              </eventsRec>
+              <clade>
+                <name>49</name>
+                <eventsRec>
+                  <speciationLoss speciesLocation="98"></speciationLoss>
+                  <speciationLoss speciesLocation="97"></speciationLoss>
+                  <speciationLoss speciesLocation="96"></speciationLoss>
+                  <speciationLoss speciesLocation="95"></speciationLoss>
+                  <speciationLoss speciesLocation="94"></speciationLoss>
+                  <speciationLoss speciesLocation="93"></speciationLoss>
+                  <speciationLoss speciesLocation="92"></speciationLoss>
+                  <speciationLoss speciesLocation="90"></speciationLoss>
+                  <leaf speciesLocation="80" geneName="45_0.0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>50</name>
+                <eventsRec>
+                  <duplication speciesLocation="98"></duplication>
+                </eventsRec>
+                <clade>
+                  <name>105</name>
+                  <eventsRec>
+                    <speciation speciesLocation="98"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>137</name>
+                    <eventsRec>
+                      <speciationLoss speciesLocation="97"></speciationLoss>
+                      <speciationLoss speciesLocation="96"></speciationLoss>
+                      <speciationLoss speciesLocation="95"></speciationLoss>
+                      <speciationLoss speciesLocation="94"></speciationLoss>
+                      <speciationLoss speciesLocation="93"></speciationLoss>
+                      <speciationLoss speciesLocation="92"></speciationLoss>
+                      <speciationLoss speciesLocation="90"></speciationLoss>
+                      <speciationLoss speciesLocation="89"></speciationLoss>
+                      <leaf speciesLocation="88" geneName="44_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>138</name>
+                    <eventsRec>
+                      <speciationLoss speciesLocation="56"></speciationLoss>
+                      <speciationLoss speciesLocation="54"></speciationLoss>
+                      <speciationLoss speciesLocation="38"></speciationLoss>
+                      <leaf speciesLocation="0" geneName="22_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>106</name>
+                  <eventsRec>
+                    <speciationLoss speciesLocation="98"></speciationLoss>
+                    <speciationLoss speciesLocation="97"></speciationLoss>
+                    <duplication speciesLocation="96"></duplication>
+                  </eventsRec>
+                  <clade>
+                    <name>143</name>
+                    <eventsRec>
+                      <speciationLoss speciesLocation="96"></speciationLoss>
+                      <speciationLoss speciesLocation="95"></speciationLoss>
+                      <speciationLoss speciesLocation="94"></speciationLoss>
+                      <speciationLoss speciesLocation="93"></speciationLoss>
+                      <speciationLoss speciesLocation="92"></speciationLoss>
+                      <speciationLoss speciesLocation="90"></speciationLoss>
+                      <speciationLoss speciesLocation="89"></speciationLoss>
+                      <speciationLoss speciesLocation="87"></speciationLoss>
+                      <speciationLoss speciesLocation="83"></speciationLoss>
+                      <leaf speciesLocation="81" geneName="48_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>144</name>
+                    <eventsRec>
+                      <duplication speciesLocation="96"></duplication>
+                    </eventsRec>
+                    <clade>
+                      <name>195</name>
+                      <eventsRec>
+                        <speciationLoss speciesLocation="96"></speciationLoss>
+                        <speciationLoss speciesLocation="95"></speciationLoss>
+                        <speciationLoss speciesLocation="94"></speciationLoss>
+                        <speciationLoss speciesLocation="93"></speciationLoss>
+                        <speciationLoss speciesLocation="92"></speciationLoss>
+                        <speciationLoss speciesLocation="90"></speciationLoss>
+                        <speciationLoss speciesLocation="89"></speciationLoss>
+                        <speciationLoss speciesLocation="87"></speciationLoss>
+                        <speciationLoss speciesLocation="83"></speciationLoss>
+                        <leaf speciesLocation="82" geneName="42_0.0"></leaf>
+                      </eventsRec>
+                    </clade>
+                    <clade>
+                      <name>196</name>
+                      <eventsRec>
+                        <speciation speciesLocation="96"></speciation>
+                      </eventsRec>
+                      <clade>
+                        <name>227</name>
+                        <eventsRec>
+                          <speciationLoss speciesLocation="95"></speciationLoss>
+                          <speciationLoss speciesLocation="94"></speciationLoss>
+                          <speciationLoss speciesLocation="93"></speciationLoss>
+                          <speciationLoss speciesLocation="92"></speciationLoss>
+                          <leaf speciesLocation="91" geneName="49_0.0"></leaf>
+                        </eventsRec>
+                      </clade>
+                      <clade>
+                        <name>32_0.0</name>
+                        <eventsRec>
+                          <leaf speciesLocation="58" geneName="32_0.0"></leaf>
+                        </eventsRec>
+                      </clade>
+                    </clade>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>28</name>
+              <eventsRec>
+                <speciationLoss speciesLocation="98"></speciationLoss>
+                <speciationLoss speciesLocation="97"></speciationLoss>
+                <speciationLoss speciesLocation="96"></speciationLoss>
+                <speciationLoss speciesLocation="95"></speciationLoss>
+                <speciationLoss speciesLocation="94"></speciationLoss>
+                <speciationLoss speciesLocation="93"></speciationLoss>
+                <speciation speciesLocation="79"></speciation>
+              </eventsRec>
+              <clade>
+                <name>30_0.0</name>
+                <eventsRec>
+                  <leaf speciesLocation="75" geneName="30_0.0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>64</name>
+                <eventsRec>
+                  <duplication speciesLocation="78"></duplication>
+                </eventsRec>
+                <clade>
+                  <name>107</name>
+                  <eventsRec>
+                    <speciation speciesLocation="78"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>43_4_0</name>
+                    <eventsRec>
+                      <leaf speciesLocation="77" geneName="43_4_0"></leaf>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>38_4_0</name>
+                    <eventsRec>
+                      <leaf speciesLocation="76" geneName="38_4_0"></leaf>
+                    </eventsRec>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>108</name>
+                  <eventsRec>
+                    <speciation speciesLocation="78"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>43_0.0</name>
+                    <eventsRec>
+                      <leaf speciesLocation="77" geneName="43_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>38_0.0</name>
+                    <eventsRec>
+                      <leaf speciesLocation="76" geneName="38_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>20</name>
+            <eventsRec>
+              <duplication speciesLocation="98"></duplication>
+            </eventsRec>
+            <clade>
+              <name>29</name>
+              <eventsRec>
+                <speciationLoss speciesLocation="98"></speciationLoss>
+                <speciationLoss speciesLocation="56"></speciationLoss>
+                <speciationLoss speciesLocation="54"></speciationLoss>
+                <speciationLoss speciesLocation="53"></speciationLoss>
+                <speciationLoss speciesLocation="52"></speciationLoss>
+                <speciationLoss speciesLocation="51"></speciationLoss>
+                <leaf speciesLocation="49" geneName="16_0.0"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>30</name>
+              <eventsRec>
+                <speciation speciesLocation="98"></speciation>
+              </eventsRec>
+              <clade>
+                <name>77</name>
+                <eventsRec>
+                  <speciationLoss speciesLocation="97"></speciationLoss>
+                  <speciationLoss speciesLocation="96"></speciationLoss>
+                  <speciationLoss speciesLocation="95"></speciationLoss>
+                  <speciationLoss speciesLocation="94"></speciationLoss>
+                  <leaf speciesLocation="74" geneName="35_0.0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>78</name>
+                <eventsRec>
+                  <speciationLoss speciesLocation="56"></speciationLoss>
+                  <speciationLoss speciesLocation="54"></speciationLoss>
+                  <speciationLoss speciesLocation="38"></speciationLoss>
+                  <speciationLoss speciesLocation="37"></speciationLoss>
+                  <speciationLoss speciesLocation="31"></speciationLoss>
+                  <speciationLoss speciesLocation="30"></speciationLoss>
+                  <speciationLoss speciesLocation="12"></speciationLoss>
+                  <leaf speciesLocation="11" geneName="27_1_0"></leaf>
+                </eventsRec>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <name>2</name>
+        <eventsRec>
+          <speciation speciesLocation="98"></speciation>
+        </eventsRec>
+        <clade>
+          <name>5</name>
+          <eventsRec>
+            <speciationLoss speciesLocation="97"></speciationLoss>
+            <leaf speciesLocation="57" geneName="31_0.0"></leaf>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>6</name>
+          <eventsRec>
+            <speciationLoss speciesLocation="56"></speciationLoss>
+            <duplication speciesLocation="54"></duplication>
+          </eventsRec>
+          <clade>
+            <name>25</name>
+            <eventsRec>
+              <speciationLoss speciesLocation="54"></speciationLoss>
+              <speciationLoss speciesLocation="38"></speciationLoss>
+              <speciationLoss speciesLocation="37"></speciationLoss>
+              <speciationLoss speciesLocation="31"></speciationLoss>
+              <speciationLoss speciesLocation="30"></speciationLoss>
+              <speciationLoss speciesLocation="29"></speciationLoss>
+              <speciationLoss speciesLocation="28"></speciationLoss>
+              <speciationLoss speciesLocation="24"></speciationLoss>
+              <leaf speciesLocation="20" geneName="29_1_0"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>26</name>
+            <eventsRec>
+              <speciation speciesLocation="54"></speciation>
+            </eventsRec>
+            <clade>
+              <name>47</name>
+              <eventsRec>
+                <speciationLoss speciesLocation="38"></speciationLoss>
+                <speciationLoss speciesLocation="37"></speciationLoss>
+                <speciation speciesLocation="31"></speciation>
+              </eventsRec>
+              <clade>
+                <name>25_0.0</name>
+                <eventsRec>
+                  <leaf speciesLocation="1" geneName="25_0.0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>84</name>
+                <eventsRec>
+                  <duplication speciesLocation="30"></duplication>
+                </eventsRec>
+                <clade>
+                  <name>131</name>
+                  <eventsRec>
+                    <speciation speciesLocation="30"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>149</name>
+                    <eventsRec>
+                      <speciationLoss speciesLocation="12"></speciationLoss>
+                      <leaf speciesLocation="11" geneName="27_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>150</name>
+                    <eventsRec>
+                      <duplication speciesLocation="29"></duplication>
+                    </eventsRec>
+                    <clade>
+                      <name>199</name>
+                      <eventsRec>
+                        <speciationLoss speciesLocation="29"></speciationLoss>
+                        <speciationLoss speciesLocation="19"></speciationLoss>
+                        <speciationLoss speciesLocation="18"></speciationLoss>
+                        <leaf speciesLocation="17" geneName="8_0.0"></leaf>
+                      </eventsRec>
+                    </clade>
+                    <clade>
+                      <name>200</name>
+                      <eventsRec>
+                        <duplication speciesLocation="29"></duplication>
+                      </eventsRec>
+                      <clade>
+                        <name>235</name>
+                        <eventsRec>
+                          <duplication speciesLocation="29"></duplication>
+                        </eventsRec>
+                        <clade>
+                          <name>253</name>
+                          <eventsRec>
+                            <speciationLoss speciesLocation="29"></speciationLoss>
+                            <speciationLoss speciesLocation="28"></speciationLoss>
+                            <speciationLoss speciesLocation="24"></speciationLoss>
+                            <speciation speciesLocation="23"></speciation>
+                          </eventsRec>
+                          <clade>
+                            <name>15_0.0</name>
+                            <eventsRec>
+                              <leaf speciesLocation="22" geneName="15_0.0"></leaf>
+                            </eventsRec>
+                          </clade>
+                          <clade>
+                            <name>17_0.0</name>
+                            <eventsRec>
+                              <leaf speciesLocation="21" geneName="17_0.0"></leaf>
+                            </eventsRec>
+                          </clade>
+                        </clade>
+                        <clade>
+                          <name>254</name>
+                          <eventsRec>
+                            <speciation speciesLocation="29"></speciation>
+                          </eventsRec>
+                          <clade>
+                            <name>273</name>
+                            <eventsRec>
+                              <speciationLoss speciesLocation="28"></speciationLoss>
+                              <speciationLoss speciesLocation="24"></speciationLoss>
+                              <leaf speciesLocation="20" geneName="29_0.0"></leaf>
+                            </eventsRec>
+                          </clade>
+                          <clade>
+                            <name>274</name>
+                            <eventsRec>
+                              <speciationLoss speciesLocation="19"></speciationLoss>
+                              <speciationLoss speciesLocation="18"></speciationLoss>
+                              <leaf speciesLocation="16" geneName="4_0.0"></leaf>
+                            </eventsRec>
+                          </clade>
+                        </clade>
+                      </clade>
+                      <clade>
+                        <name>236</name>
+                        <eventsRec>
+                          <speciationLoss speciesLocation="29"></speciationLoss>
+                          <speciationLoss speciesLocation="28"></speciationLoss>
+                          <speciation speciesLocation="27"></speciation>
+                        </eventsRec>
+                        <clade>
+                          <name>24_0.0</name>
+                          <eventsRec>
+                            <leaf speciesLocation="26" geneName="24_0.0"></leaf>
+                          </eventsRec>
+                        </clade>
+                        <clade>
+                          <name>28_0.0</name>
+                          <eventsRec>
+                            <leaf speciesLocation="25" geneName="28_0.0"></leaf>
+                          </eventsRec>
+                        </clade>
+                      </clade>
+                    </clade>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>132</name>
+                  <eventsRec>
+                    <speciation speciesLocation="30"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>151</name>
+                    <eventsRec>
+                      <speciationLoss speciesLocation="12"></speciationLoss>
+                      <speciationLoss speciesLocation="10"></speciationLoss>
+                      <speciation speciesLocation="9"></speciation>
+                    </eventsRec>
+                    <clade>
+                      <name>3_1_0</name>
+                      <eventsRec>
+                        <leaf speciesLocation="7" geneName="3_1_0"></leaf>
+                      </eventsRec>
+                    </clade>
+                    <clade>
+                      <name>206</name>
+                      <eventsRec>
+                        <duplication speciesLocation="8"></duplication>
+                      </eventsRec>
+                      <clade>
+                        <name>10_1_0</name>
+                        <eventsRec>
+                          <leaf speciesLocation="8" geneName="10_1_0"></leaf>
+                        </eventsRec>
+                      </clade>
+                      <clade>
+                        <name>10_2_0</name>
+                        <eventsRec>
+                          <leaf speciesLocation="8" geneName="10_2_0"></leaf>
+                        </eventsRec>
+                      </clade>
+                    </clade>
+                  </clade>
+                  <clade>
+                    <name>152</name>
+                    <eventsRec>
+                      <speciation speciesLocation="29"></speciation>
+                    </eventsRec>
+                    <clade>
+                      <name>207</name>
+                      <eventsRec>
+                        <speciation speciesLocation="19"></speciation>
+                      </eventsRec>
+                      <clade>
+                        <name>239</name>
+                        <eventsRec>
+                          <speciationLoss speciesLocation="18"></speciationLoss>
+                          <leaf speciesLocation="16" geneName="4_1_0"></leaf>
+                        </eventsRec>
+                      </clade>
+                      <clade>
+                        <name>240</name>
+                        <eventsRec>
+                          <speciation speciesLocation="15"></speciation>
+                        </eventsRec>
+                        <clade>
+                          <name>6_1_0</name>
+                          <eventsRec>
+                            <leaf speciesLocation="14" geneName="6_1_0"></leaf>
+                          </eventsRec>
+                        </clade>
+                        <clade>
+                          <name>21_1_0</name>
+                          <eventsRec>
+                            <leaf speciesLocation="13" geneName="21_1_0"></leaf>
+                          </eventsRec>
+                        </clade>
+                      </clade>
+                    </clade>
+                    <clade>
+                      <name>208</name>
+                      <eventsRec>
+                        <speciationLoss speciesLocation="28"></speciationLoss>
+                        <speciation speciesLocation="27"></speciation>
+                      </eventsRec>
+                      <clade>
+                        <name>28_1_0</name>
+                        <eventsRec>
+                          <leaf speciesLocation="25" geneName="28_1_0"></leaf>
+                        </eventsRec>
+                      </clade>
+                      <clade>
+                        <name>24_1_0</name>
+                        <eventsRec>
+                          <leaf speciesLocation="26" geneName="24_1_0"></leaf>
+                        </eventsRec>
+                      </clade>
+                    </clade>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>48</name>
+              <eventsRec>
+                <speciationLoss speciesLocation="53"></speciationLoss>
+                <speciation speciesLocation="52"></speciation>
+              </eventsRec>
+              <clade>
+                <name>87</name>
+                <eventsRec>
+                  <speciationLoss speciesLocation="51"></speciationLoss>
+                  <leaf speciesLocation="50" geneName="18_0.0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>88</name>
+                <eventsRec>
+                  <speciation speciesLocation="48"></speciation>
+                </eventsRec>
+                <clade>
+                  <name>9_0.0</name>
+                  <eventsRec>
+                    <leaf speciesLocation="47" geneName="9_0.0"></leaf>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>136</name>
+                  <eventsRec>
+                    <speciation speciesLocation="46"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>5_0.0</name>
+                    <eventsRec>
+                      <leaf speciesLocation="44" geneName="5_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>7_0.0</name>
+                    <eventsRec>
+                      <leaf speciesLocation="45" geneName="7_0.0"></leaf>
+                    </eventsRec>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>

@@ -1,0 +1,176 @@
+<recGeneTree>
+  <phylogeny rooted="true">
+    <clade>
+      <name>G26_17</name>
+      <eventsRec>
+        <duplication speciesLocation="17"></duplication>
+      </eventsRec>
+      <clade>
+        <name>G2_17</name>
+        <eventsRec>
+          <speciation speciesLocation="17"></speciation>
+        </eventsRec>
+        <clade>
+          <name>G0_15</name>
+          <eventsRec>
+            <leaf speciesLocation="15" geneName="G0_15"></leaf>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>G1_16</name>
+          <eventsRec>
+            <leaf speciesLocation="16" geneName="G1_16"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+      <clade>
+        <name>G25_17</name>
+        <eventsRec>
+          <speciationOut speciesLocation="17"></speciationOut>
+        </eventsRec>
+        <clade>
+          <name>G7_9</name>
+          <eventsRec>
+            <transferBack destinationSpecies="9"></transferBack>
+            <speciationOut speciesLocation="9"></speciationOut>
+          </eventsRec>
+          <clade>
+            <name>G3_2</name>
+            <eventsRec>
+              <transferBack destinationSpecies="2"></transferBack>
+              <leaf speciesLocation="2" geneName="G3_2"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>G6_9</name>
+            <eventsRec>
+              <speciationOut speciesLocation="9"></speciationOut>
+            </eventsRec>
+            <clade>
+              <name>G4_9</name>
+              <eventsRec>
+                <leaf speciesLocation="9" geneName="G4_9"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>G5_15</name>
+              <eventsRec>
+                <transferBack destinationSpecies="15"></transferBack>
+                <leaf speciesLocation="15" geneName="G5_15"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>G24_17</name>
+          <eventsRec>
+            <speciation speciesLocation="17"></speciation>
+          </eventsRec>
+          <clade>
+            <name>G12_15</name>
+            <eventsRec>
+              <speciationOut speciesLocation="15"></speciationOut>
+            </eventsRec>
+            <clade>
+              <name>G10_0</name>
+              <eventsRec>
+                <transferBack destinationSpecies="0"></transferBack>
+                <speciationOut speciesLocation="0"></speciationOut>
+              </eventsRec>
+              <clade>
+                <name>G8_0</name>
+                <eventsRec>
+                  <leaf speciesLocation="0" geneName="G8_0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>G9_12</name>
+                <eventsRec>
+                  <transferBack destinationSpecies="12"></transferBack>
+                  <leaf speciesLocation="12" geneName="G9_12"></leaf>
+                </eventsRec>
+              </clade>
+            </clade>
+            <clade>
+              <name>G11_15</name>
+              <eventsRec>
+                <leaf speciesLocation="15" geneName="G11_15"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>G23_16</name>
+            <eventsRec>
+              <speciationOut speciesLocation="16"></speciationOut>
+            </eventsRec>
+            <clade>
+              <name>G17_16</name>
+              <eventsRec>
+                <speciationOut speciesLocation="16"></speciationOut>
+              </eventsRec>
+              <clade>
+                <name>G15_15</name>
+                <eventsRec>
+                  <transferBack destinationSpecies="15"></transferBack>
+                  <speciationOut speciesLocation="15"></speciationOut>
+                </eventsRec>
+                <clade>
+                  <name>G13_15</name>
+                  <eventsRec>
+                    <leaf speciesLocation="15" geneName="G13_15"></leaf>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>G14_11</name>
+                  <eventsRec>
+                    <transferBack destinationSpecies="11"></transferBack>
+                    <leaf speciesLocation="11" geneName="G14_11"></leaf>
+                  </eventsRec>
+                </clade>
+              </clade>
+              <clade>
+                <name>G16_16</name>
+                <eventsRec>
+                  <leaf speciesLocation="16" geneName="G16_16"></leaf>
+                </eventsRec>
+              </clade>
+            </clade>
+            <clade>
+              <name>G22_5</name>
+              <eventsRec>
+                <transferBack destinationSpecies="5"></transferBack>
+                <speciationOut speciesLocation="5"></speciationOut>
+              </eventsRec>
+              <clade>
+                <name>G18_5</name>
+                <eventsRec>
+                  <leaf speciesLocation="5" geneName="G18_5"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>G21_12</name>
+                <eventsRec>
+                  <transferBack destinationSpecies="12"></transferBack>
+                  <speciationOut speciesLocation="12"></speciationOut>
+                </eventsRec>
+                <clade>
+                  <name>G19_12</name>
+                  <eventsRec>
+                    <leaf speciesLocation="12" geneName="G19_12"></leaf>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>G20_16</name>
+                  <eventsRec>
+                    <transferBack destinationSpecies="16"></transferBack>
+                    <leaf speciesLocation="16" geneName="G20_16"></leaf>
+                  </eventsRec>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>

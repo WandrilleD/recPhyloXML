@@ -1,0 +1,84 @@
+<recGeneTree>
+  <phylogeny rooted="true">
+    <clade>
+      <name>n12</name>
+      <eventsRec>
+        <speciation speciesLocation="n32"></speciation>
+      </eventsRec>
+      <clade>
+        <name>n8</name>
+        <eventsRec>
+          <speciation speciesLocation="n30"></speciation>
+        </eventsRec>
+        <clade>
+          <name>r21</name>
+          <eventsRec>
+            <speciationLoss speciesLocation="n28"></speciationLoss>
+            <duplication speciesLocation="HUMAN"></duplication>
+          </eventsRec>
+          <clade>
+            <name>gB_human</name>
+            <eventsRec>
+              <leaf speciesLocation="HUMAN" geneName="gB_human"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>gA_human</name>
+            <eventsRec>
+              <leaf speciesLocation="HUMAN" geneName="gA_human"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>n7</name>
+          <eventsRec>
+            <duplication speciesLocation="MOUSE"></duplication>
+          </eventsRec>
+          <clade>
+            <name>n5</name>
+            <eventsRec>
+              <speciationOut speciesLocation="MOUSE"></speciationOut>
+            </eventsRec>
+            <clade>
+              <name>gA_mouse</name>
+              <eventsRec>
+                <leaf speciesLocation="MOUSE" geneName="gA_mouse"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>g_gorilla</name>
+              <eventsRec>
+                <transferBack destinationSpecies="GORILLA"></transferBack>
+                <leaf speciesLocation="GORILLA" geneName="g_gorilla"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>gB_mouse</name>
+            <eventsRec>
+              <leaf speciesLocation="MOUSE" geneName="gB_mouse"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <name>n11</name>
+        <eventsRec>
+          <duplication speciesLocation="COW"></duplication>
+        </eventsRec>
+        <clade>
+          <name>gY_cow</name>
+          <eventsRec>
+            <leaf speciesLocation="COW" geneName="gY_cow"></leaf>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>gX_cow</name>
+          <eventsRec>
+            <leaf speciesLocation="COW" geneName="gX_cow"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>
