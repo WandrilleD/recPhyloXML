@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        13-Jan-2017         
-##  Last modified:  16-Jan-2017         
+##  Last modified:  07-Sept-2017         
 ## 
 ##  Decribes two classes : RecEvent and ReconciledTree
 ##  the ReconciledTree class represent a reconciled gene tree and 

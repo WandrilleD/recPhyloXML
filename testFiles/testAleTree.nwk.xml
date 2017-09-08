@@ -1,0 +1,105 @@
+<recPhylo>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <clade>
+        <name>.6</name>
+        <eventsRec>
+          <speciation speciesLocation="6" ts="6"></speciation>
+        </eventsRec>
+        <clade>
+          <name>.4.2.T@1|a</name>
+          <eventsRec>
+            <speciationLoss speciesLocation="4" ts="4"></speciationLoss>
+            <speciationLoss speciesLocation="2" ts="2"></speciationLoss>
+            <speciationOut speciesLocation="a" ts="1"></speciationOut>
+          </eventsRec>
+          <clade>
+            <name>a_a1</name>
+            <eventsRec>
+              <leaf speciesLocation="a" ts="0"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>b_b1</name>
+            <eventsRec>
+              <transferBack destinationSpecies="b" ts="0"></transferBack>
+              <leaf speciesLocation="b" ts="0"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>D@5|5</name>
+          <eventsRec>
+            <duplication speciesLocation="5" ts="5"></duplication>
+          </eventsRec>
+          <clade>
+            <name>.5</name>
+            <eventsRec>
+              <speciation speciesLocation="5" ts="5"></speciation>
+            </eventsRec>
+            <clade>
+              <name>T@4|g</name>
+              <eventsRec>
+                <speciationOut speciesLocation="g" ts="4"></speciationOut>
+              </eventsRec>
+              <clade>
+                <name>Tb@3|3</name>
+                <eventsRec>
+                  <bifurcationOut></bifurcationOut>
+                </eventsRec>
+                <clade>
+                  <name>d_d1</name>
+                  <eventsRec>
+                    <transferBack destinationSpecies="d" ts="0"></transferBack>
+                    <leaf speciesLocation="d" ts="0"></leaf>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>e_e2</name>
+                  <eventsRec>
+                    <transferBack destinationSpecies="3" ts="3"></transferBack>
+                    <speciationLoss speciesLocation="3" ts="3"></speciationLoss>
+                    <leaf speciesLocation="e" ts="0"></leaf>
+                  </eventsRec>
+                </clade>
+              </clade>
+              <clade>
+                <name>g_g2</name>
+                <eventsRec>
+                  <leaf speciesLocation="g" ts="0"></leaf>
+                </eventsRec>
+              </clade>
+            </clade>
+            <clade>
+              <name>g_g3</name>
+              <eventsRec>
+                <speciationOutLoss speciesLocation="3" ts="4"></speciationOutLoss>
+                <transferBack destinationSpecies="g" ts="1"></transferBack>
+                <leaf speciesLocation="g" ts="0"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>.5</name>
+            <eventsRec>
+              <speciation speciesLocation="5" ts="5"></speciation>
+            </eventsRec>
+            <clade>
+              <name>e_e1</name>
+              <eventsRec>
+                <speciationLoss speciesLocation="3" ts="3"></speciationLoss>
+                <leaf speciesLocation="e" ts="0"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>g_g1</name>
+              <eventsRec>
+                <leaf speciesLocation="g" ts="0"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+</recPhylo>
