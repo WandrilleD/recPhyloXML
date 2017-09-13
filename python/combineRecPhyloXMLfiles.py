@@ -1,7 +1,3 @@
-
-
-
-
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -11,7 +7,8 @@
 ##  Last modified:  08-Sept-2017        
 ##
 ##  
-##  
+##  This script is used to combine different recPhyloXML 
+##    (containing different reconciled gene trees) files into one.
 ##
 ##  requires : ete3 ( http://etetoolkit.org/ )
 ##             

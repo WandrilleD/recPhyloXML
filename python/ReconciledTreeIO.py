@@ -19,13 +19,12 @@
 import ete3 
 import xml.etree.ElementTree as ET
 
-from ReconciledTree import ReconciledTree, RecEvent
+from ReconciledTree import ReconciledTree, RecEvent, ReconciledTreeList
 
 
 
 
-
-class ReconciledTreeParser_recPhyloXML:
+class recPhyloXML_parser:
     def __init__(self):
         pass
 
@@ -39,18 +38,31 @@ class ReconciledTreeParser_recPhyloXML:
             None : error
                 or
             (ReconciledTree) : the reconciled tree
+                or
+            (ReconciledTreeList) : a set of reconciled trees
         """
 
         tree = ET.parse(fileName)
         
         root = tree.getroot()
 
-        node = self.parse_recGeneTree(root)
+        TAGtoFUNCTION = { "recPhylo" : self.parse_recPhylo,
+                          "recGeneTree" : self.parse_recGeneTree }
+    
+        parseFunction  = TAGtoFUNCTION.get( self.tagCorrection(root.tag) , None)
 
-        if node is None:
+
+        if parseFunction is None:
+            raise Exception("recPhyloXML exception. Problem while parsing the xml file : no recPhylo or recgeneTree tag found at the root of the file.")
+            return None
+
+        else:
+            obj = parseFunction(root)
+
+        if obj is None:
             raise Exception("recPhyloXML exception. Problem while parsing the xml file : no phylogeny or clade found?")
 
-        return node
+        return obj
 
 
     def tagCorrection(self, tag):
@@ -86,6 +98,71 @@ class ReconciledTreeParser_recPhyloXML:
             (str) : text contained in the element
         """
         return element.text
+
+
+    def parse_recPhylo(self, element):
+        """
+        *recursive funtion*
+    
+        Takes:
+            - element (Element) : element with the "recPhylo" tag
+    
+        Returns:
+            None : error
+                or
+            (ReconciledTreeList) : a representation of the different recGeneTrees in the file, with their species tree if it is present
+        """
+        TAG = "recPhylo"
+    
+        if not self.isOfTag(element, TAG):
+            raise Exception('BadTagException. The element is of tag ' + element.tag + " instead of " + TAG + "." )
+    
+        children = element.getchildren()
+    
+        RTL = ReconciledTreeList()
+
+        for ch in children:
+            if self.isOfTag(ch,  "recGeneTree" ) :
+                RT = self.parse_recGeneTree(ch)
+                RTL.append(RT)
+
+            elif self.isOfTag(ch,  "spTree" ):
+                #parsing a simple tree 
+                RTL.setSpTree( self.parse_SpTree(ch) ) 
+
+
+
+        return RTL
+
+
+    def parse_SpTree(self, element):
+        """
+        *recursive funtion*
+    
+        Takes:
+            - element (Element) : element with the "spTree" tag
+    
+        Returns:
+            None : error
+                or
+            (ete3.Tree) : the species tree
+        """
+        TAG = "spTree"
+    
+        if not self.isOfTag(element, TAG):
+            raise Exception('BadTagException. The element is of tag ' + element.tag + " instead of " + TAG + "." )
+    
+        children = element.getchildren()
+    
+        node = None
+
+        for ch in children:
+            if self.isOfTag(ch,  "phylogeny" ) :
+                node = self.parse_phylogeny(ch, reconciled = False)
+                break
+    
+        return node 
+
     
     def parse_recGeneTree(self, element):
         """
@@ -110,23 +187,26 @@ class ReconciledTreeParser_recPhyloXML:
 
         for ch in children:
             if self.isOfTag(ch,  "phylogeny" ) :
-                node = self.parse_phylogeny(ch)
+                node = self.parse_phylogeny(ch, reconciled = True)
                 break
     
         return node 
     
     
-    def parse_phylogeny(self, element):
+    def parse_phylogeny(self, element , reconciled = True):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "phylogeny" tag
+            - reconciled (bool) [default = True] : whether the element passed should be considered a ReconciledTree or not
     
         Returns:
             None : error
                 or
             (ReconciledTree) : the reconciled tree
+                or
+            (ete3.Tree) : the tree (if reconciled is True)
         """
         TAG = "phylogeny"
     
@@ -142,7 +222,7 @@ class ReconciledTreeParser_recPhyloXML:
         for ch in children:
             if self.isOfTag(ch ,  "clade"):
                 if node is None:
-                    node  = self.parse_clade(ch)
+                    node  = self.parse_clade(ch, reconciled)
                 else:
                     raise Exception("BadTagException. A " + TAG + " element has more than one clade children (only one is expected).")                
             else:
@@ -165,12 +245,13 @@ class ReconciledTreeParser_recPhyloXML:
     
         return node
     
-    def parse_clade(self, element):
+    def parse_clade(self, element, reconciled = True):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "clade" tag
+            - reconciled (bool) [default = True] : whether the element passed should be considered a ReconciledTree or not
     
         Returns:
             None : error
@@ -192,7 +273,7 @@ class ReconciledTreeParser_recPhyloXML:
     
         for ch in children:
             if self.isOfTag(ch ,  "clade" ):
-                childrenNodes.append( self.parse_clade(ch) )
+                childrenNodes.append( self.parse_clade(ch , reconciled) )
     
             elif self.isOfTag(ch ,  "name" ):
                 name = self.parseSimpletextElement(ch)            
@@ -209,12 +290,19 @@ class ReconciledTreeParser_recPhyloXML:
         for k,v in element.items():
             if k != "rooted":
                 additionnalInfo[k] = v
-    
-    
-        node = ReconciledTree()
-        node.setName(name)
-        for e in events:
-            node.addEvent(e)
+
+        node = None
+
+        if reconciled:
+            node = ReconciledTree()
+        else:
+            node = ete3.Tree()
+
+        node.name = name
+
+        if reconciled:
+            for e in events:
+                node.addEvent(e)
     
         for ch in childrenNodes:
             node.add_child( ch )
@@ -276,10 +364,26 @@ class ReconciledTreeParser_recPhyloXML:
 
 if __name__ == "__main__":
 
-    fileName = '../testFiles/geneFamily0.phyloxml'
+    parser = recPhyloXML_parser()
     
-    print "this simple test parses the file" , fileName , "and prints its structure to the screen"
+    fileName = '../testFiles/geneFamily0.phyloxml'
+    print "Test 1: parses the file" , fileName , "and prints its structure to the screen"
 
-    parser = ReconciledTreeParser_recPhyloXML()
 
     print parser.parse(fileName)
+
+
+    fileName = '../testFiles/SeveralRecTrees.xml'
+    print "Test 2: parses the file" , fileName , "and prints the number of reconciled trees it contains on the screen"
+
+    RTL = parser.parse(fileName)
+    print len(RTL)
+
+
+    fileName = "../testFiles/genetree_SMALL.reconciled.0.ntg.xml"
+    print "Test 3: parses the file" , fileName , "and prints the species tree. it contains on the screen"
+
+
+    RTL = parser.parse(fileName)
+    print RTL.spTree
+
