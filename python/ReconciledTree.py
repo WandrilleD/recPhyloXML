@@ -604,7 +604,6 @@ class ReconciledTreeList:
                     tmp[sp][e] = 0
 
                 for sp in EventsSummary[e]:
-
                     tmp[sp][e] += 1
 
             EventsSummary = tmp
