@@ -9,7 +9,7 @@ This file contains a class for reconciled trees
 Created the: 15-09-2017
 by: Wandrille Duchemin
 
-Last modified the: 15-09-2017
+Last modified the: 18-09-2017
 by: Wandrille Duchemin
 
 */
@@ -25,9 +25,6 @@ by: Wandrille Duchemin
 #include <Bpp/Exceptions.h>
 #include <fstream>
 
-
-//#include "CladeReconciliation.h" //object representing the reconciliation of a clade split as outputted by TERA
-//#include "ReconciliationEvent.h" //object representing and event of reconciliation as outputted by TERA
 
 #include "XMLUtils.h"
 

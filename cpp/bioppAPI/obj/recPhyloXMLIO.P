@@ -1,5 +1,5 @@
-obj/main.o: source/main.cpp /usr/include/stdc-predef.h \
- include/ReconciledTree.h /usr/include/c++/4.9/string \
+obj/recPhyloXMLIO.o: source/recPhyloXMLIO.cpp /usr/include/stdc-predef.h \
+ include/recPhyloXMLIO.h /usr/include/c++/4.9/string \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -284,9 +284,9 @@ obj/main.o: source/main.cpp /usr/include/stdc-predef.h \
  /home/wandrille/local/bpp/dev/include/Bpp/Phyl/TreeTemplateTools.h \
  /home/wandrille/local/bpp/dev/include/Bpp/Phyl/NodeTemplate.h \
  /home/wandrille/local/bpp/dev/include/Bpp/Phyl/Node.h include/XMLUtils.h \
- include/recPhyloXMLIO.h include/ReconciledTree.h
-source/main.cpp /usr/include/stdc-predef.h :
- include/ReconciledTree.h /usr/include/c++/4.9/string :
+ include/ReconciledTree.h
+source/recPhyloXMLIO.cpp /usr/include/stdc-predef.h :
+ include/recPhyloXMLIO.h /usr/include/c++/4.9/string :
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h :
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h :
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h :
@@ -571,4 +571,4 @@ source/main.cpp /usr/include/stdc-predef.h :
  /home/wandrille/local/bpp/dev/include/Bpp/Phyl/TreeTemplateTools.h :
  /home/wandrille/local/bpp/dev/include/Bpp/Phyl/NodeTemplate.h :
  /home/wandrille/local/bpp/dev/include/Bpp/Phyl/Node.h include/XMLUtils.h :
- include/recPhyloXMLIO.h include/ReconciledTree.h :
+ include/ReconciledTree.h :

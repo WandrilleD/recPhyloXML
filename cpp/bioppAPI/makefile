@@ -17,7 +17,7 @@ LDFLAGS=-L$(BPP_LIB) -L$(BOOST_LIB)
 LIBS=-lm -lbpp-core -lbpp-seq -lbpp-phyl
 
 
-RECPHYLOXMLBPPAPI_FILES = main.cpp ReconciledTree.cpp XMLUtils.cpp
+RECPHYLOXMLBPPAPI_FILES = main.cpp recPhyloXMLIO.cpp ReconciledTree.cpp XMLUtils.cpp
 RECPHYLOXMLBPPAPI_OBJS = $(subst .cpp,.o,$(RECPHYLOXMLBPPAPI_FILES))
 RECPHYLOXMLBPPAPI_OBJS := $(addprefix $(ODIR)/, $(RECPHYLOXMLBPPAPI_OBJS))
 RECPHYLOXMLBPPAPI_SRCS = $(addprefix $(SDIR)/, $(RECPHYLOXMLBPPAPI_FILES))
@@ -33,6 +33,8 @@ debug: all
 
 
 $(BDIR)/testRecPhyloXMLBppAPI: $(RECPHYLOXMLBPPAPI_OBJS)
+	mkdir -p bin 
+	$(CXX) -o $@ $^ $(CPPFLAGS) $(LDFLAGS) $(LIBS)
 
 
 #general rules

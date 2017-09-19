@@ -5,12 +5,97 @@ This file contains XML util functions
 Created the: 09-02-2015
 by: Wandrille Duchemin
 
-Last modified the: 09-02-2016
+Last modified the: 18-09-2017
 by: Wandrille Duchemin
 
 */
 
 #include "XMLUtils.h"
+
+/*
+returns true if target is in ref
+*/
+bool isIn(string target, vector <string> &ref)
+{
+    for(unsigned i = 0 ; i < ref.size() ; i++)
+    {
+        if(target.compare(ref[i]) == 0)
+            return true;
+    }
+    return false;
+}
+
+
+/*
+Takes:
+ - ifstream& fileIN : file the data comes from
+ - vector<string> & tags : lost of tag to find the next of
+
+Returns:
+ (string) : tag that was found
+            "" if none wasas found
+
+*/
+string goToNextOf(ifstream& fileIN , vector <string> &tags)
+{
+ if( fileIN.eof() )
+     return "";
+
+ string line;
+ getline( fileIN, line );
+
+ map <string, string> * properties = new map <string,string>;
+ string * value = new string(""); 
+
+ string Tname = InterpretLineXML(line,properties,value);
+
+ while(!isIn(Tname, tags))
+ {
+    if(fileIN.eof())
+         return "";
+
+    getline( fileIN, line );
+    Tname = InterpretLineXML(line,properties,value);
+ }
+
+ return Tname;
+}
+
+
+
+/*
+Takes:
+ - ifstream& fileIN : file the data comes from
+ - string tag : tag to find the next of
+
+Returns:
+ (bool) : true if the next tag was found
+*/
+bool goToNextTag(ifstream& fileIN , string tag)
+{
+ if( fileIN.eof() )
+     return false;
+
+ string line;
+ getline( fileIN, line );
+
+ map <string, string> * properties = new map <string,string>;
+ string * value = new string(""); 
+
+ string Tname = InterpretLineXML(line,properties,value);
+
+
+ while(Tname.compare(tag) != 0) 
+ {
+    if(fileIN.eof())
+         return false;
+
+    getline( fileIN, line );
+    Tname = InterpretLineXML(line,properties,value);
+ }
+
+ return true;
+}
 
 
 

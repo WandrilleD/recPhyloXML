@@ -122,16 +122,16 @@ void ReconciledTree::setNodeDetailsFromXMLLine(int Nodeid, string Tname, map <st
     }
 
 
-/*
-C       --> Current (leaf)
-S       --> Speciation (in the species tree)
-L       --> Loss (in the species tree)
-D       --> Duplication (in the species tree)
-Sout    --> Speciation to an extinct/unsampled lineage (otherwise called SpeciationOut)
-R       --> Transfer reception
-N       --> no event (to account for time slices)
-Bout    --> Bifurcation in an extinct/unsampled lineage (otherwise called BifurcationOut)
-*/
+    /*
+    C       --> Current (leaf)
+    S       --> Speciation (in the species tree)
+    L       --> Loss (in the species tree)
+    D       --> Duplication (in the species tree)
+    Sout    --> Speciation to an extinct/unsampled lineage (otherwise called SpeciationOut)
+    R       --> Transfer reception
+    N       --> no event (to account for time slices)
+    Bout    --> Bifurcation in an extinct/unsampled lineage (otherwise called BifurcationOut)
+    */
 
     int evtCode = -1;
     //3. finding which event is implied
@@ -158,7 +158,7 @@ Bout    --> Bifurcation in an extinct/unsampled lineage (otherwise called Bifurc
     {
         evtCode = D;
     }
-    else if(Tname.compare("transferLoss") == 0)
+    else if(Tname.compare("transferBack") == 0)
     {
         evtCode = R;
     }
@@ -236,13 +236,15 @@ void ReconciledTree::addXMLClade(ifstream& fileIN,int Nodeid, bool VERBOSE) // w
 
     //cout << "value:" << *value << endl;
 
+    string name = "";
+
     while(Tname.compare("/clade") != 0) //--> line signing the end of the clade
     {
         if(Tname.compare("name") == 0) // found name
         {
             if(VERBOSE)
                 cout << "found name : " << *value <<  endl;
-            setNodeName(Nodeid, *value);
+            name = *value;
 
         }
         else if(Tname.compare("eventsRec") == 0) // reading reconciliation events
@@ -329,6 +331,9 @@ void ReconciledTree::addXMLClade(ifstream& fileIN,int Nodeid, bool VERBOSE) // w
             }
             newNode->addSon(currentNode);
 
+            if((i==0)&&(name!=""))
+                newNode->setName(name);
+
             if(isRoot(Nodeid))
                 rootAt(newNode); // rerooting
 
@@ -337,8 +342,14 @@ void ReconciledTree::addXMLClade(ifstream& fileIN,int Nodeid, bool VERBOSE) // w
 
             setNodeDetailsFromXMLLine(newId,evtLines[i], VERBOSE);
 
+
         }
     }
+    else if(name!="")
+    {
+        setNodeName(Nodeid,name);
+    }
+
 
     setNodeDetailsFromXMLLine(Nodeid,evtLines.back(), VERBOSE); // setting details on the last node == the bifurcation or leaf
 
@@ -371,6 +382,13 @@ void ReconciledTree::readPhyloXMLFile(ifstream& fileIN, TreeTemplate<Node> * Str
     ///post-treatment requiring species tree
     vector < Node * > NodesP  = getNodes();
 
+
+    bool NoSpeciesTree = false;
+    if(Stree == NULL)
+        NoSpeciesTree=true;
+    else if(Stree->getRootNode() == NULL)
+        NoSpeciesTree=true;
+
     for(unsigned i = 0 ; i < NodesP.size(); i++)
     {
         int evt = getNodeEvent(NodesP[i]);
@@ -378,27 +396,38 @@ void ReconciledTree::readPhyloXMLFile(ifstream& fileIN, TreeTemplate<Node> * Str
 
         if(( isSpeciation( evt ) ) && (SonsP.size() == 1)) //speciation with only one child --> speciation loss
         {
-            string spF = getNodeSpecies(NodesP[i]); //species of the speciation
-            string spC = getNodeSpecies(SonsP[0]); //sister species of the loss.
+            string lostSpecies;
+            if(NoSpeciesTree)
+            { // failsafe for the case where there is no valid species tree
+                lostSpecies = "";
+            }
+            else
+            { 
+                string spF = getNodeSpecies(NodesP[i]); //species of the speciation
+                string spC = getNodeSpecies(SonsP[0]); //sister species of the loss.
+    
+                Node * ParentSpNode = Stree->getNode(spF);
+    
+                if( ParentSpNode == NULL)
+                    throw Exception("ReconciledTree::readPhyloXMLFile : could not find species with name "+spF+"."); 
+    
+    
+                vector <Node * > spSons = ParentSpNode->getSons();
+    
+                //there should be 2 sons in spSons
+                if(spSons.size() != 2)
+                    throw Exception("ReconciledTree::readPhyloXMLFile : species without son as a speciation."); 
+    
+                int LostIndex = 0;
+                if(spC == spSons[LostIndex]->getName())
+                    LostIndex++;
 
-            Node * ParentSpNode = Stree->getNode(spF);
+                lostSpecies = spSons[LostIndex]->getName();
+            }
 
-            if( ParentSpNode == NULL)
-                throw Exception("ReconciledTree::readPhyloXMLFile : could not find species with name "+spF+"."); 
-
-
-            vector <Node * > spSons = ParentSpNode->getSons();
-
-            //there should be 2 sons in spSons
-            if(spSons.size() != 2)
-                throw Exception("ReconciledTree::readPhyloXMLFile : species without son as a speciation."); 
-
-            int LostIndex = 0;
-            if(spC == spSons[LostIndex]->getName())
-                LostIndex++;
 
             if(VERBOSE)
-                cout << "Adding Loss node in species " << spSons[LostIndex] << "->" << spSons[LostIndex]->getName() << endl;
+                cout << "Adding Loss node in species " << lostSpecies << endl;
 
 
             //creating new loss node
@@ -408,7 +437,7 @@ void ReconciledTree::readPhyloXMLFile(ifstream& fileIN, TreeTemplate<Node> * Str
             currentNode->addSon(newLossNode);
     
             //setting new loss node properties
-            setNodeSpecies(newLossNode,spSons[LostIndex]->getName());
+            setNodeSpecies(newLossNode, lostSpecies );
             setNodeEvent(newLossNode, L); // setting as a LOSS
             setNodeCladeNum(newLossNode, -1); // the clade num of the loss node is -1 -> the empty clade
 
