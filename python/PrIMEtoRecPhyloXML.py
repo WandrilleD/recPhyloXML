@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        23-Mar-2017         
-##  Last modified:  07-Sept-2017        
+##  Last modified:  20-Sept-2017        
 ##
 ##  Decribes functions to transform a reconciled tree in 
 ##  PrIME format into a tree in the recPhyloXML format
@@ -217,28 +217,7 @@ def readPrIMEParenthesis(s):
             if not c.sameSpeciesAsParent(parent = IntNode): ## we found a children node
                 addTbEvent(c) ## we add the transferBack event
 
-    ## checking if : one of the child is a loss
-    hasLoss = False
-    nbCh = len(childrenNodes)
 
-    j = 0
-    while j < len(childrenNodes):
-        c  = childrenNodes[j]
-        if isLossNode(c):
-            hasLoss = True
-            childrenNodes.pop(j)
-            continue
-        j +=1
-
-    if len(childrenNodes) == 0 and nbCh>0:
-        ## special case where all of our children were losses...
-        ##we add a loss at the begining...
-        IntNode.addEvent( RecEvent("L","unk") , append = False )
-        return i,IntNode
-
-
-    if hasLoss:
-        setNodeAsXloss(IntNode)
 
     if len(childrenNodes) > 1:
         ## two or more children, add them

@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        24-Feb-2017         
-##  Last modified:  07-Sept-2017        
+##  Last modified:  20-Sept-2017        
 ##
 ##  Decribes functions to transform a reconciled tree in 
 ##  NHX format into a tree in the recPhyloXML format
@@ -148,7 +148,8 @@ def annotateIncompleteRecRTree(recTree , spTree):
     ## for quicker access
     dspNameToNode = {n.name : n for n in spTree.traverse()}
 
-    for n in recTree.traverse("postorder"):
+    NODETODO = [n for n in recTree.traverse("postorder")]
+    for n in NODETODO:
 
         if n.is_leaf():
             continue
@@ -178,6 +179,7 @@ def annotateIncompleteRecRTree(recTree , spTree):
 
         ChSpMustBeEqual = ( n.getEvents()[-1].eventCode != "S" ) ##unless this is a speciation, the next event shall have the same species
 
+
         ## now we want to add SL events
         for i,c in enumerate(n.children):
 
@@ -188,19 +190,80 @@ def annotateIncompleteRecRTree(recTree , spTree):
 
 
             while childrenSpNode.up != currentSpNode:
-                childrenSpNode = childrenSpNode.up
-                
-                e = RecEvent( "SL" , childrenSpNode.name )
-                c.addEvent( e,append = False) ##will insert the evt in first position
+                #print "adding SL in ", childrenSpNode.up.name , "from" , childrenSpNode.name, 'loss in', getSister(childrenSpNode).name
+                #print "in node ", c.name, "father is ", n.name
+                addSpeciationAndLoss(c , childrenSpNode)
+                #e = RecEvent( "SL" , childrenSpNode.up.name )
+                #c.addEvent( e,append = False) ##will insert the evt in first position
 
+                childrenSpNode = childrenSpNode.up
 
             ## last SL in case the parent is not a speciation
             if ChSpMustBeEqual:
-                e = RecEvent( "SL" , childrenSpNode.name )
-                c.addEvent( e,append = False) ##will insert the evt in first position                
+                #print "adding SL in ", childrenSpNode.up.name , "from" , childrenSpNode.name, 'loss in', getSister(childrenSpNode).name
+                #print "in node ", c.name, "father is ", n.name
+                addSpeciationAndLoss(c , childrenSpNode)
+                #e = RecEvent( "SL" , childrenSpNode.name )
+                #c.addEvent( e,append = False) ##will insert the evt in first position                
 
     return recTree
 
+
+def addSpeciationAndLoss(node , keptSpeciesNode):
+    """
+    *modifies node in place*
+
+    Takes:
+        - node (ReconciledTree): node where a SpeciationLoss must take place
+        - keptSpeciesNode (ete3.TreeNode): node of the species tree where the lineage survived (ie. the sister species of the one where the loss occured)
+    """
+    parentSpeciesNode = keptSpeciesNode.up
+    lossSpeciesNode = getSister(keptSpeciesNode)
+
+    lossNode = ReconciledTree()
+    lossNode.addEvent( RecEvent("loss" , lossSpeciesNode.name) )
+    lossNode.name="LOSS"
+
+    # 2. create the kept child
+
+    keptNode = ReconciledTree()
+
+    ##transfering the events of node to keptNode
+    while len(node.eventRecs) >  0:
+        keptNode.addEvent( node.popEvent(0), append=False )
+
+    # 3. link children to kept child
+    while len(node.children) > 0:
+        c = node.children[0]
+        c.detach()
+        keptNode.add_child(c)
+
+
+    # 4. branching loss and kept to original node
+
+    node.add_child(lossNode)
+    node.add_child(keptNode)
+
+    # 5. editing the event
+    e = RecEvent( "S" , keptSpeciesNode.up.name )
+    node.addEvent( e,append = False) ##will insert the evt in first position
+    
+    return
+
+
+
+
+
+def getSister(node):
+    """ presumes a binary tree """
+    if node.is_root():
+        return None
+
+    C = node.up.children
+    for c in C:
+        if c != node:
+            return c
+    raise Exception("tree format error: expected a binary tree")
 
 import sys
 

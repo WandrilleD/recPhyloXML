@@ -355,25 +355,28 @@ void WritePhyloXMLRecTreeAux(ostream& OUT, ReconciledTree * Rtree, Node * node, 
     
             if(children.size() == 0)
                 donext = false;
-    
-            for(unsigned i = 0 ; i < children.size(); i++)
-            {
-                int event = Rtree->getNodeEvent(children[i]);
-                if(Rtree->isLoss(event))
-                {
-                    hasLoss = true;
-                }
-                else
-                {
-                    if(nextNode  == currentNode)//this is the first non-loss child of current id -> we accept it as nextid
-                        nextNode = children[i];
-                    else //this is not the first non-loss child of current id -> we get out of the loop
-                    {
-                        donext = false;
-                        break;
-                    }
-                }
-            }
+            else if(children.size() > 1)
+                donext = false;
+            else
+                nextNode = children[0];
+            //for(unsigned i = 0 ; i < children.size(); i++)
+            //{
+                //int event = Rtree->getNodeEvent(children[i]);
+                //if(Rtree->isLoss(event))
+                //{
+                //    hasLoss = true;
+                //}
+                //else
+                //{
+                    //if(nextNode  == currentNode)//this is the first child of current id -> we accept it as nextid
+                    //    nextNode = children[i];
+                    //else //this is not the first non-loss child of current id -> we get out of the loop
+                    //{
+                    //    donext = false;
+                    //    break;
+                    //}
+                //}
+            //}
             //we write the event of the current node
             WritePhyloXMLRecEvent(OUT,  Rtree, currentNode, indent_level,  hasLoss);
         }

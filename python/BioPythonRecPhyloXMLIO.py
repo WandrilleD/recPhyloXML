@@ -3,7 +3,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  #
 ##  Created:        25-August-2016      #
-##  Last modified:  25-August-2016      #
+##  Last modified:  20-Sept-2017        #
 #########################################
 
 ## todo
@@ -50,6 +50,7 @@ class recGeneTreeXMLParser (PhyloXMLIO.Parser):
 
     def _parse_clade(self, parent):
         """Parse a Clade node and its children, recursively."""
+
         clade = BPrecPhyloXML.Clade(**parent.attrib)
         if clade.branch_length is not None:
             clade.branch_length = float(clade.branch_length)
@@ -114,8 +115,7 @@ class recGeneTreeXMLParser (PhyloXMLIO.Parser):
 
 
 
-    _events_recPhyloXML_tags = [ 'speciationLoss',
-                                'speciationOutLoss',
+    _events_recPhyloXML_tags = ['loss',
                                 'transferBack',
                                 'speciation',
                                 'speciationOut',
@@ -132,9 +132,11 @@ class recGeneTreeXMLParser (PhyloXMLIO.Parser):
                 if tag == EVENTSRECTAG:
                     parent.clear()
                     break
-
                 if tag in self._events_recPhyloXML_tags:
                     eventsRec.events.append( BPrecPhyloXML.RecEvent( tag , elem.attrib ) )
+                else:
+                    print 'non valid tag event ' + tag
+                    raise Exception('non valid tag event ' + tag)
 
         return eventsRec
 
@@ -161,8 +163,11 @@ class recPhyloXMLParser (recGeneTreeXMLParser):
         #event, root = next(context)
         #self.root = root
         #self.context = context
-
-        self.splittedRootTag = PhyloXMLIO._split_namespace(self.root.tag)[1]
+        
+        if len(PhyloXMLIO._split_namespace(self.root.tag)) == 1:
+            self.splittedRootTag = self.root.tag
+        else:
+            self.splittedRootTag = PhyloXMLIO._split_namespace(self.root.tag)[1]
 
     def parse(self):
         """ Parse the recPhyloXML file incrementally and return the next recGeneTree or recPhylo object """
@@ -176,27 +181,35 @@ class recPhyloXMLParser (recGeneTreeXMLParser):
 
             for event, elem in self.context:
                 #print event, elem.tag, PhyloXMLIO._split_namespace(elem.tag)[1]
-
-                if event == 'start' and PhyloXMLIO._split_namespace(elem.tag)[1] == RECGENETREETAG:
+                tmp = PhyloXMLIO._split_namespace(elem.tag)
+                SRT = elem.tag
+                if len(tmp)> 1:
+                    SRT = tmp[1]
+                if event == 'start' and SRT == RECGENETREETAG:
                     ## reading a rec phylogeny and adding it
+
                     for r in recGeneTreeXMLParser.parse(self):
                         recs.addRecGeneTree( r )
 
-                elif event == 'start' and PhyloXMLIO._split_namespace(elem.tag)[1] == SPPHYLOTAG:
+                elif event == 'start' and SRT == SPPHYLOTAG:
                     ## reading a species tree
                     if recs.hasSpeciesTree(): ## there already is a species tree -> replace it but give out some error?
                         print "Warning: found several", SPPHYLOTAG, "in a", RECPHYLOTAG, ". There should be only one."
                         continue
 
-                    stree = PhyloXMLIO.Parser.parse(self)
+                    stree = [x for x in  PhyloXMLIO.Parser.parse(self)]
+                    print stree
+                    if len(stree) != 1:
+                        raise Exception("error while parsing the species tree!")
+
                     if not stree is None:
-                        recs.setSpTree(stree)
+                        recs.setSpTree(stree[0])
             
             yield recs
 
 
     def read(self):
-        """ read the recPhyloXML file return the recGeneTree or recPhylo object it contains"""
+        """ read the recPhyloXML file return the recGeneTree or recPhylo objects it contains"""
         p =self.parse()
         X = [i for i in p]
         self.root.clear()
@@ -399,13 +412,17 @@ if __name__ == "__main__":
 
     print "testing Biopython recPhyloXML API"
 
-    filename2 = '../testFiles/reconciledTrees.xml'
+    filename2 = '../testFiles/lossSeparatedtestFile'
     print "parsing reconciled gene tree from",filename2
 
     X = recPhyloXMLParser(filename2)
-    p = X.read()
+    p = X.read()[0]
+
     print "generated object:", [type(i) for i in p]
-    print "number of geen trees in the file",len(p)
+    print "number of gene trees in the file",len(p)
+
+    print p.hasSpeciesTree()
+    print p.spTree
 
     #leaf = p[0].get_terminals()[0]
     #print leaf.eventsRec
@@ -413,7 +430,7 @@ if __name__ == "__main__":
     #    print x.tag, x.attributes
 
 
-    write(p[0],'../testFiles/generatedRecPhylo.xml')
+    write(p,'../testFiles/generatedRecPhylo.xml')
     print "written generated recPhylo object in", '../testFiles/generatedRecPhylo.xml'
-    write(p[0][0],'../testFiles/generated.xml')
+    write(p[0],'../testFiles/generated.xml')
     print "written generated recGeneTree object in", '../testFiles/generated.xml'

@@ -1,0 +1,48 @@
+<recPhylo>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <clade>
+        <name>G6_6</name>
+        <eventsRec>
+          <speciation speciesLocation="6"></speciation>
+        </eventsRec>
+        <clade>
+          <name>LOSS</name>
+          <eventsRec>
+            <loss speciesLocation=""></loss>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>G6_6.c</name>
+          <eventsRec>
+            <speciation speciesLocation="5"></speciation>
+          </eventsRec>
+          <clade>
+            <name>G2_3</name>
+            <eventsRec>
+              <speciation speciesLocation="3"></speciation>
+            </eventsRec>
+            <clade>
+              <name>G0_1</name>
+              <eventsRec>
+                <leaf speciesLocation="1"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>G1_2</name>
+              <eventsRec>
+                <leaf speciesLocation="2"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>G3_4</name>
+            <eventsRec>
+              <leaf speciesLocation="4"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+</recPhylo>

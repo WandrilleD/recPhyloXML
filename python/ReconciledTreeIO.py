@@ -4,9 +4,11 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        19-Jul-2017         
-##  Last modified:  19-Jul-2017         
+##  Last modified:  20-Sept-2017         
 ## 
-##  Decribes one classes : ...
+##  Decribes one classe : recPhyloXML_parser
+##          which enables the reading of recPhyloXML files 
+##          to populate a ete3 derived objects
 ##
 ##  requires : ReconciledTree.py
 ##             ete3 ( http://etetoolkit.org/ )
@@ -22,22 +24,30 @@ import xml.etree.ElementTree as ET
 from ReconciledTree import ReconciledTree, RecEvent, ReconciledTreeList
 
 
+OBSOLETE_EVENT_TAGS = ["speciationLoss", "speciationOutLoss" ] #  will give a warning 
 
+def OBSOLETEWARNINGTXT(tag):
+    return  "The obsolete tag "+tag+" was observed and this may result in unwanted behaviour. Please use a conversion script such as convertToLossIndependentVersion.py to update your file to a newest verszion of the format."
 
 class recPhyloXML_parser:
     def __init__(self):
         pass
 
 
-    def parse(self, fileName):
+    def parse(self , fileName , obsoleteTagsBehaviour = 1 ):
         """
+        Please note that this parser is intentionnaly quite permissive (eg. it will allow any kind of event tags, or properties in those tags)
+        , in order to accomodate to changes in the format and eventual adaption of it to special problems.
+
         Takes:
-            -   fileName (str) : name of a recPhyloXML file containing a single reconciled gene tree
+            - fileName (str) : name of a recPhyloXML file containing a single reconciled gene tree
+            - obsoleteTagsBehaviour (int) [default = 1]: Beahviour when an event tag that is in OBSOLETE_EVENT_TAGS is encountered
+                                                         0 : ignore
+                                                         1 : warning
+                                                         2 : throw exception
 
         Returns:
             None : error
-                or
-            (ReconciledTree) : the reconciled tree
                 or
             (ReconciledTreeList) : a set of reconciled trees
         """
@@ -49,6 +59,7 @@ class recPhyloXML_parser:
         TAGtoFUNCTION = { "recPhylo" : self.parse_recPhylo,
                           "recGeneTree" : self.parse_recGeneTree }
     
+
         parseFunction  = TAGtoFUNCTION.get( self.tagCorrection(root.tag) , None)
 
 
@@ -57,10 +68,18 @@ class recPhyloXML_parser:
             return None
 
         else:
-            obj = parseFunction(root)
+            obj = parseFunction(root, obsoleteTagsBehaviour)
 
         if obj is None:
             raise Exception("recPhyloXML exception. Problem while parsing the xml file : no phylogeny or clade found?")
+
+
+
+        rootIsRT = (self.tagCorrection(root.tag) == "recGeneTree")
+
+
+        if rootIsRT: #to be sure to return renconiledTreeList, we convert
+            return ReconciledTreeList(recTrees = [ obj ])
 
         return obj
 
@@ -100,13 +119,16 @@ class recPhyloXML_parser:
         return element.text
 
 
-    def parse_recPhylo(self, element):
+    def parse_recPhylo(self, element, obsoleteTagsBehaviour = 1 ):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "recPhylo" tag
-    
+            - obsoleteTagsBehaviour (int) [default = 1]: 0 : ignore
+                                                     1 : warning
+                                                     2 : throw exception
+
         Returns:
             None : error
                 or
@@ -123,7 +145,7 @@ class recPhyloXML_parser:
 
         for ch in children:
             if self.isOfTag(ch,  "recGeneTree" ) :
-                RT = self.parse_recGeneTree(ch)
+                RT = self.parse_recGeneTree(ch, obsoleteTagsBehaviour)
                 RTL.append(RT)
 
             elif self.isOfTag(ch,  "spTree" ):
@@ -141,7 +163,7 @@ class recPhyloXML_parser:
     
         Takes:
             - element (Element) : element with the "spTree" tag
-    
+
         Returns:
             None : error
                 or
@@ -164,13 +186,16 @@ class recPhyloXML_parser:
         return node 
 
     
-    def parse_recGeneTree(self, element):
+    def parse_recGeneTree(self, element, obsoleteTagsBehaviour = 1 ):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "recGeneTree" tag
-    
+            - obsoleteTagsBehaviour (int) [default = 1]: 0 : ignore
+                                                         1 : warning
+                                                         2 : throw exception
+
         Returns:
             None : error
                 or
@@ -187,20 +212,23 @@ class recPhyloXML_parser:
 
         for ch in children:
             if self.isOfTag(ch,  "phylogeny" ) :
-                node = self.parse_phylogeny(ch, reconciled = True)
+                node = self.parse_phylogeny(ch, reconciled = True, obsoleteTagsBehaviour=obsoleteTagsBehaviour)
                 break
     
         return node 
     
     
-    def parse_phylogeny(self, element , reconciled = True):
+    def parse_phylogeny(self, element , reconciled = True, obsoleteTagsBehaviour = 1 ):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "phylogeny" tag
             - reconciled (bool) [default = True] : whether the element passed should be considered a ReconciledTree or not
-    
+            - obsoleteTagsBehaviour (int) [default = 1]: 0 : ignore
+                                                         1 : warning
+                                                         2 : throw exception
+
         Returns:
             None : error
                 or
@@ -222,7 +250,7 @@ class recPhyloXML_parser:
         for ch in children:
             if self.isOfTag(ch ,  "clade"):
                 if node is None:
-                    node  = self.parse_clade(ch, reconciled)
+                    node  = self.parse_clade(ch, reconciled, obsoleteTagsBehaviour)
                 else:
                     raise Exception("BadTagException. A " + TAG + " element has more than one clade children (only one is expected).")                
             else:
@@ -245,14 +273,17 @@ class recPhyloXML_parser:
     
         return node
     
-    def parse_clade(self, element, reconciled = True):
+    def parse_clade(self, element, reconciled = True, obsoleteTagsBehaviour = 1 ):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "clade" tag
             - reconciled (bool) [default = True] : whether the element passed should be considered a ReconciledTree or not
-    
+            - obsoleteTagsBehaviour (int) [default = 1]: 0 : ignore
+                                                         1 : warning
+                                                         2 : throw exception
+
         Returns:
             None : error
                 or
@@ -273,13 +304,13 @@ class recPhyloXML_parser:
     
         for ch in children:
             if self.isOfTag(ch ,  "clade" ):
-                childrenNodes.append( self.parse_clade(ch , reconciled) )
+                childrenNodes.append( self.parse_clade(ch , reconciled, obsoleteTagsBehaviour) )
     
             elif self.isOfTag(ch ,  "name" ):
                 name = self.parseSimpletextElement(ch)            
     
             elif self.isOfTag(ch ,  "eventsRec" ):
-                events = self.parse_eventsRec(ch)
+                events = self.parse_eventsRec(ch, obsoleteTagsBehaviour)
     
             else:
                 ### treatment for other children
@@ -313,13 +344,16 @@ class recPhyloXML_parser:
     
         return node
     
-    def parse_eventsRec(self, element):
+    def parse_eventsRec(self, element, obsoleteTagsBehaviour = 1 ):
         """
         *recursive funtion*
     
         Takes:
             - element (Element) : element with the "eventsRec" tag
-    
+            - obsoleteTagsBehaviour (int) [default = 1]: 0 : ignore
+                                                         1 : warning
+                                                         2 : throw exception
+
         Returns:
             None : error
                 or
@@ -338,6 +372,13 @@ class recPhyloXML_parser:
     
             evtCode = self.tagCorrection( ch.tag )
     
+            if obsoleteTagsBehaviour>0:
+                if evtCode in OBSOLETE_EVENT_TAGS:
+                    print OBSOLETEWARNINGTXT(evtCode)
+
+                    if obsoleteTagsBehaviour>1:
+                        raise Exception("ERROR. obsolete tag " + evtCode + " encoutered")
+
             species = None
             speciesTAGs  = ["destinationSpecies" , "speciesLocation"]
             ts = None
@@ -366,24 +407,29 @@ if __name__ == "__main__":
 
     parser = recPhyloXML_parser()
     
-    fileName = '../testFiles/geneFamily0.phyloxml'
-    print "Test 1: parses the file" , fileName , "and prints its structure to the screen"
+#    fileName = '../testFiles/geneFamily0.phyloxml'
+#    print "Test 1: parses the file" , fileName , "and prints its structure to the screen"
+#
+#
+#    print parser.parse(fileName)
+#
+#
+#    fileName = '../testFiles/SeveralRecTrees.xml'
+#    print "Test 2: parses the file" , fileName , "and prints the number of reconciled trees it contains on the screen"
+#
+#    RTL = parser.parse(fileName)
+#    print len(RTL)
+#
+#
+#    fileName = "../testFiles/genetree_SMALL.reconciled.0.ntg.xml"
+#    print "Test 3: parses the file" , fileName , "and prints the species tree. it contains on the screen"
+#
+#    RTL = parser.parse(fileName)
+#    print RTL.spTree
 
-
-    print parser.parse(fileName)
-
-
-    fileName = '../testFiles/SeveralRecTrees.xml'
-    print "Test 2: parses the file" , fileName , "and prints the number of reconciled trees it contains on the screen"
+    fileName = "testFiles/lossSeparatedtestFile"
 
     RTL = parser.parse(fileName)
-    print len(RTL)
 
-
-    fileName = "../testFiles/genetree_SMALL.reconciled.0.ntg.xml"
-    print "Test 3: parses the file" , fileName , "and prints the species tree. it contains on the screen"
-
-
-    RTL = parser.parse(fileName)
-    print RTL.spTree
-
+    for RT in RTL.recTrees:
+        print RT

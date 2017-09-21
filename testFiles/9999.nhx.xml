@@ -381,68 +381,134 @@
   <recGeneTree>
     <phylogeny rooted="true">
       <clade>
-        <name>10</name>
+        <name>22</name>
         <eventsRec>
           <speciation speciesLocation="101"></speciation>
         </eventsRec>
         <clade>
-          <name>8</name>
+          <name>20</name>
           <eventsRec>
-            <speciationLoss speciesLocation="100"></speciationLoss>
-            <speciationLoss speciesLocation="99"></speciationLoss>
-            <speciationLoss speciesLocation="98"></speciationLoss>
-            <speciationLoss speciesLocation="97"></speciationLoss>
-            <speciationLoss speciesLocation="75"></speciationLoss>
-            <speciationLoss speciesLocation="74"></speciationLoss>
-            <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
+            <speciation speciesLocation="100"></speciation>
           </eventsRec>
           <clade>
-            <name>6</name>
+            <name>LOSS</name>
             <eventsRec>
-              <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
+              <loss speciesLocation="28"></loss>
             </eventsRec>
-            <clade>
-              <name>4</name>
-              <eventsRec>
-                <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
-              </eventsRec>
-              <clade>
-                <name>2</name>
-                <eventsRec>
-                  <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
-                </eventsRec>
-                <clade>
-                  <name>Oryctolagus.cuniculus_ENSOCUG00000021099</name>
-                  <eventsRec>
-                    <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
-                  </eventsRec>
-                </clade>
-                <clade>
-                  <name>Oryctolagus.cuniculus_ENSOCUG00000027485</name>
-                  <eventsRec>
-                    <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
-                  </eventsRec>
-                </clade>
-              </clade>
-              <clade>
-                <name>Oryctolagus.cuniculus_ENSOCUG00000023169</name>
-                <eventsRec>
-                  <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
-                </eventsRec>
-              </clade>
-            </clade>
-            <clade>
-              <name>Oryctolagus.cuniculus_ENSOCUG00000024786</name>
-              <eventsRec>
-                <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
-              </eventsRec>
-            </clade>
           </clade>
           <clade>
-            <name>Oryctolagus.cuniculus_ENSOCUG00000025189</name>
+            <name>19</name>
             <eventsRec>
-              <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
+              <speciation speciesLocation="99"></speciation>
             </eventsRec>
+            <clade>
+              <name>LOSS</name>
+              <eventsRec>
+                <loss speciesLocation="37"></loss>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>18</name>
+              <eventsRec>
+                <speciation speciesLocation="98"></speciation>
+              </eventsRec>
+              <clade>
+                <name>LOSS</name>
+                <eventsRec>
+                  <loss speciesLocation="62"></loss>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>17</name>
+                <eventsRec>
+                  <speciation speciesLocation="97"></speciation>
+                </eventsRec>
+                <clade>
+                  <name>LOSS</name>
+                  <eventsRec>
+                    <loss speciesLocation="96"></loss>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>16</name>
+                  <eventsRec>
+                    <speciation speciesLocation="75"></speciation>
+                  </eventsRec>
+                  <clade>
+                    <name>LOSS</name>
+                    <eventsRec>
+                      <loss speciesLocation="71"></loss>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>15</name>
+                    <eventsRec>
+                      <speciation speciesLocation="74"></speciation>
+                    </eventsRec>
+                    <clade>
+                      <name>LOSS</name>
+                      <eventsRec>
+                        <loss speciesLocation="Ochotona.princeps"></loss>
+                      </eventsRec>
+                    </clade>
+                    <clade>
+                      <name>14</name>
+                      <eventsRec>
+                        <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
+                      </eventsRec>
+                      <clade>
+                        <name>12</name>
+                        <eventsRec>
+                          <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
+                        </eventsRec>
+                        <clade>
+                          <name>10</name>
+                          <eventsRec>
+                            <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
+                          </eventsRec>
+                          <clade>
+                            <name>8</name>
+                            <eventsRec>
+                              <duplication speciesLocation="Oryctolagus.cuniculus"></duplication>
+                            </eventsRec>
+                            <clade>
+                              <name>Oryctolagus.cuniculus_ENSOCUG00000021099</name>
+                              <eventsRec>
+                                <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
+                              </eventsRec>
+                            </clade>
+                            <clade>
+                              <name>Oryctolagus.cuniculus_ENSOCUG00000027485</name>
+                              <eventsRec>
+                                <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
+                              </eventsRec>
+                            </clade>
+                          </clade>
+                          <clade>
+                            <name>Oryctolagus.cuniculus_ENSOCUG00000023169</name>
+                            <eventsRec>
+                              <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
+                            </eventsRec>
+                          </clade>
+                        </clade>
+                        <clade>
+                          <name>Oryctolagus.cuniculus_ENSOCUG00000024786</name>
+                          <eventsRec>
+                            <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
+                          </eventsRec>
+                        </clade>
+                      </clade>
+                      <clade>
+                        <name>Oryctolagus.cuniculus_ENSOCUG00000025189</name>
+                        <eventsRec>
+                          <leaf speciesLocation="Oryctolagus.cuniculus"></leaf>
+                        </eventsRec>
+                      </clade>
+                    </clade>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
           </clade>
         </clade>
         <clade>

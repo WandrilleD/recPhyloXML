@@ -8,3 +8,5 @@ this git contains several directories:
    testFiles/ : contains various examples of the format and data to test the various scripts
 
    python/ : code in python for the manipulation of files in the recPhyloXML format
+
+   cpp/ : code in c++ to read/write recPhyloXML files

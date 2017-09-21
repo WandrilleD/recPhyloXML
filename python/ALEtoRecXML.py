@@ -3,7 +3,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        20-June-2016        
-##  Last modified:  07-Sept-2017
+##  Last modified:  20-Sept-2017
 ##
 ##  Decribes functions to transform a reconciled tree in 
 ##  NHX format into a tree in the recPhyloXML format
@@ -18,6 +18,44 @@
 from ete3 import Tree, TreeNode
 from ReconciledTree import RecEvent, ReconciledTree
 
+def treatLossEvent(node, LossEvent , keptChildNameSuffix = ".c"):
+    """
+    Takes:
+        - node (ReconciledTree)
+        - LossEvent (recEvent)
+        - keptChildNameSuffix (str) [default = ".c"] : suffix to add to the name of the new child of node that is NOT a loss 
+    """
+
+
+    # 1. create the loss child
+
+    #determining ts if there is one
+    lostTS = LossEvent.timeSlice
+    if not lostTS is None:
+        lostTS -= 1 # one TS more recent than the parent
+
+    lossNode = ReconciledTree()
+    lossNode.addEvent( RecEvent("loss" , "", ts= lostTS ) )
+    lossNode.name="LOSS"
+
+    # 2. create the kept child
+
+    keptNode = ReconciledTree()
+    keptNode.name = node.name + keptChildNameSuffix
+
+    # 4. branching loss and kept to original node
+
+    node.add_child(lossNode)
+    node.add_child(keptNode)
+
+    # 5. editing the event and adding to node
+
+    e = LossEvent.eventCode
+    LossEvent.eventCode = e.rpartition("L")[0]
+
+    node.addEvent(LossEvent)
+
+    return keptNode
 
 
 def parse_node_annotation(node_annotation, isLeaf = False, isDead = False):
@@ -188,6 +226,8 @@ def ALEtreeToReconciledTree(ALEtree, isDead = False):
 
     events = parse_node_annotation(annotation, isLeaf, isDead = isDead)
 
+
+
     if isLeaf:
         ## we specify the species of the leaf event
         events[-1].species = getLeafSpeciesFromLeafName( ALEtree.name )
@@ -201,13 +241,18 @@ def ALEtreeToReconciledTree(ALEtree, isDead = False):
 
     RT = ReconciledTree()
     RT.setName(name)
+
+    current = RT
+
     for e in events:
-        RT.addEvent(e)
-
-
+        if e.eventCode.endswith("L"):
+            print "plep"
+            current = treatLossEvent(current, e , ".c")
+        else:
+            current.addEvent(e)
 
     for c in ALEtree.children: ##recursion on successors
-        RT.add_child( ALEtreeToReconciledTree(c, isDead ) )
+        current.add_child( ALEtreeToReconciledTree(c, isDead ) )
 
     return RT
 
@@ -229,12 +274,13 @@ if __name__ == "__main__":
                 Given a file containing reconciled trees in ALE reconciled tree format, 
                 this script writes the trees in recPhyloXML format.
 
-                usage : python ALEtoRecPhyloXML.py -g geneFileIn -s speciesFileIn [-o fileOut --include.species]
+                usage : python ALEtoRecPhyloXML.py -g geneFileIn [-o fileOut]
                             -g geneFileIn       : name of the file containing NHX reconciliations
                             -o fileOut          : (optional) name of the output file (default is geneFileIn + ".xml" )
 
                """
 #                            (TODO:)
+#                usage : python ALEtoRecPhyloXML.py -g geneFileIn -s speciesFileIn [-o fileOut --include.species]
 #                            (-s speciesFileIn    : (optional) name of the species tree file
 #                            (--include.species   : (optional) whether the species tree should be included in the XML file (using the <spTree> tag)
 

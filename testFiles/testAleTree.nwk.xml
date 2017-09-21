@@ -9,22 +9,44 @@
         <clade>
           <name>.4.2.T@1|a</name>
           <eventsRec>
-            <speciationLoss speciesLocation="4" ts="4"></speciationLoss>
-            <speciationLoss speciesLocation="2" ts="2"></speciationLoss>
-            <speciationOut speciesLocation="a" ts="1"></speciationOut>
+            <speciation speciesLocation="4" ts="4"></speciation>
           </eventsRec>
           <clade>
-            <name>a_a1</name>
+            <name>LOSS</name>
             <eventsRec>
-              <leaf speciesLocation="a" ts="0"></leaf>
+              <loss speciesLocation="" ts="3"></loss>
             </eventsRec>
           </clade>
           <clade>
-            <name>b_b1</name>
+            <name>.4.2.T@1|a.c</name>
             <eventsRec>
-              <transferBack destinationSpecies="b" ts="0"></transferBack>
-              <leaf speciesLocation="b" ts="0"></leaf>
+              <speciation speciesLocation="2" ts="2"></speciation>
             </eventsRec>
+            <clade>
+              <name>LOSS</name>
+              <eventsRec>
+                <loss speciesLocation="" ts="1"></loss>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>.4.2.T@1|a.c.c</name>
+              <eventsRec>
+                <speciationOut speciesLocation="a" ts="1"></speciationOut>
+              </eventsRec>
+              <clade>
+                <name>a_a1</name>
+                <eventsRec>
+                  <leaf speciesLocation="a" ts="0"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>b_b1</name>
+                <eventsRec>
+                  <transferBack destinationSpecies="b" ts="0"></transferBack>
+                  <leaf speciesLocation="b" ts="0"></leaf>
+                </eventsRec>
+              </clade>
+            </clade>
           </clade>
         </clade>
         <clade>
@@ -58,9 +80,20 @@
                   <name>e_e2</name>
                   <eventsRec>
                     <transferBack destinationSpecies="3" ts="3"></transferBack>
-                    <speciationLoss speciesLocation="3" ts="3"></speciationLoss>
-                    <leaf speciesLocation="e" ts="0"></leaf>
+                    <speciation speciesLocation="3" ts="3"></speciation>
                   </eventsRec>
+                  <clade>
+                    <name>LOSS</name>
+                    <eventsRec>
+                      <loss speciesLocation="" ts="2"></loss>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>e_e2.c</name>
+                    <eventsRec>
+                      <leaf speciesLocation="e" ts="0"></leaf>
+                    </eventsRec>
+                  </clade>
                 </clade>
               </clade>
               <clade>
@@ -73,10 +106,21 @@
             <clade>
               <name>g_g3</name>
               <eventsRec>
-                <speciationOutLoss speciesLocation="3" ts="4"></speciationOutLoss>
-                <transferBack destinationSpecies="g" ts="1"></transferBack>
-                <leaf speciesLocation="g" ts="0"></leaf>
+                <speciationOut speciesLocation="3" ts="4"></speciationOut>
               </eventsRec>
+              <clade>
+                <name>LOSS</name>
+                <eventsRec>
+                  <loss speciesLocation="" ts="3"></loss>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>g_g3.c</name>
+                <eventsRec>
+                  <transferBack destinationSpecies="g" ts="1"></transferBack>
+                  <leaf speciesLocation="g" ts="0"></leaf>
+                </eventsRec>
+              </clade>
             </clade>
           </clade>
           <clade>
@@ -87,9 +131,20 @@
             <clade>
               <name>e_e1</name>
               <eventsRec>
-                <speciationLoss speciesLocation="3" ts="3"></speciationLoss>
-                <leaf speciesLocation="e" ts="0"></leaf>
+                <speciation speciesLocation="3" ts="3"></speciation>
               </eventsRec>
+              <clade>
+                <name>LOSS</name>
+                <eventsRec>
+                  <loss speciesLocation="" ts="2"></loss>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>e_e1.c</name>
+                <eventsRec>
+                  <leaf speciesLocation="e" ts="0"></leaf>
+                </eventsRec>
+              </clade>
             </clade>
             <clade>
               <name>g_g1</name>

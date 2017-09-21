@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        13-Jan-2017         
-##  Last modified:  11-Sept-2017         
+##  Last modified:  20-Sept-2017         
 ## 
 ##  Decribes 3 classes : RecEvent, ReconciledTree and ReconciledTreeList
 ##  the ReconciledTree class represent a reconciled gene tree and 
@@ -76,11 +76,13 @@ def myBasicTreeXMLLines(tree):
 EVENTTAGCORRESPONDANCE = {    "D" : "duplication",
                         "S" : "speciation",
                         "C" : "leaf",
-                        "SL": "speciationLoss",
+                        "L":"loss",
 
                         "Bo": "bifurcationOut",
                         "So": "speciationOut",
                         "Tb": "transferBack",
+
+                        "SL": "speciationLoss",
                         "SoL": "speciationOutLoss"
                         }
 
@@ -114,22 +116,10 @@ class RecEvent:
         """ tmp simplistic version """
         s = str(self.species)
         s += "."
-        coev = self.additionnalInfo.get("coevent",False)
-        if coev:
-            if coev > 1:
-                ## co-TL case -> differentiate coTL , TcoL and coTcoL
-                if coev == 2:
-                    s += self.eventCode[:-1] + "co" + self.eventCode[-1]
-                    return s 
-                elif coev == 3:
-                    s += "co" + self.eventCode[:-1] + "co" + self.eventCode[-1]
-                    return s
-            s += "co"
+        
         s += str(self.eventCode)
         return s
 
-    def isCoev(self):
-        return self.additionnalInfo.get("coevent",False)
 
     def makeRecXMLstr(self , speciesNames):
         if self.eventCode == "N":
@@ -159,6 +149,7 @@ class RecEvent:
         propertyName = "confidence"
         if self.additionnalInfo.has_key(propertyName):
             S += " " + propertyName + "=" + '"' + self.additionnalInfo[propertyName] + '"'
+
         if self.eventCode == "C":
             propertyName = "geneName"
             if self.additionnalInfo.has_key(propertyName):
@@ -280,10 +271,8 @@ class ReconciledTree(ete3.TreeNode):
         Lines.append( "</recGeneTree>" )
         return Lines
 
-    def countEvents(self, accountForCoEvent = False):
+    def countEvents(self):
         """
-        Takes:
-            - accountForCoEvent (bool) [default = False] : if True, RecEvent with a co-event tag will be discriminated from the one that don't have one
 
         Returns:
             (dict) : keys are recPhyloXML event tags, values are the number of times these events occur in the tree
@@ -291,15 +280,13 @@ class ReconciledTree(ete3.TreeNode):
         devent = {}
         for e in self.eventRecs:
             code  = e.eventCode
-            if accountForCoEvent:
-                if e.isCoev():
-                    code  = "co" + code
+
             if not devent.has_key(code):
                 devent[code] = 0
             devent[code] += 1 
 
         for c in self.get_children():
-            tmp = c.countEvents(accountForCoEvent)
+            tmp = c.countEvents()
             for k in tmp.keys():
                 if not devent.has_key(k):
                     devent[k] = 0
@@ -345,23 +332,25 @@ class ReconciledTree(ete3.TreeNode):
             reportTD = False
             reportTR = False
 
-            if evtCode in ( EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["SoL"] ):
+            if ( evtCode in ( EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["SoL"] ) ) or (evtCode in ( "SL", "SoL" )):
                 species = self.getLostSpecies( i , speciesTree, speciesIdFeature)
                 evtCode = "loss"
                 report = True
 
-            elif evtCode == EVENTTAGCORRESPONDANCE["D"]:
+            elif evtCode == EVENTTAGCORRESPONDANCE["D"] or evtCode =="D":
+                report = True
+            elif evtCode == EVENTTAGCORRESPONDANCE["L"] or evtCode =="L":
                 report = True
 
             if report: ##reporting duplication or loss
                 EventsSummary[evtCode].append(species)
 
 
-            if includeTransferReception and evtCode == EVENTTAGCORRESPONDANCE["Tb"] :
+            if includeTransferReception and ( evtCode == EVENTTAGCORRESPONDANCE["Tb"] or evtCode == "Tb" ) :
                 evtCode = "transferReception"
                 EventsSummary[evtCode].append(species)
 
-            elif includeTransferDeparture and evtCode in [ EVENTTAGCORRESPONDANCE["So"] , EVENTTAGCORRESPONDANCE["SoL"] ]:
+            elif includeTransferDeparture and ( (evtCode in [ EVENTTAGCORRESPONDANCE["So"] , EVENTTAGCORRESPONDANCE["SoL"] ] ) or ( evtCode in [ "So", "SoL" ]) ):
                 evtCode = "transferDeparture"
                 EventsSummary[evtCode].append(species)
 
@@ -398,7 +387,7 @@ class ReconciledTree(ete3.TreeNode):
 
     def getLostSpecies( self, evtIndex , speciesTree, speciesIdFeature = "name"):
         """
-        given the index of an event of loss (speciationLoss for instance) in this nodes,
+        given the index of an event of *Loss (speciationLoss for instance) in this nodes,
         this function returns the id of the species where the loss occured 
         (this function is useful because speciationLoss event references the species of the speciation rather than the species of the loss)
 
@@ -584,6 +573,9 @@ class ReconciledTreeList:
 
         for RT in self.recTrees:
             tmp = RT.getEventsSummary(self.spTree , includeTransferReception , includeTransferDeparture , speciesIdFeature)
+
+            print RT
+            print tmp
 
             for k,v in tmp.items():
                 EventsSummary[k] += v

@@ -3,7 +3,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  #
 ##  Created:        25-August-2016      #
-##  Last modified:  25-August-2016      #
+##  Last modified:  20-sept-2017        #
 #########################################
 
 
@@ -132,8 +132,7 @@ class eventsRec (PhyloXML.PhyloElement):
 
 class RecEvent(PhyloXML.PhyloElement):
 
-    ok_tag = ['speciationLoss',
-              'speciationOutLoss',
+    ok_tag = ['loss',
               'transferBack',
               'speciation',
               'speciationOut',

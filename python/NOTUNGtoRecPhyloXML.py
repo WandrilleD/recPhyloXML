@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        22-Mar-2017         
-##  Last modified:  07-Sept-2017        
+##  Last modified:  20-Sept-2017        
 ##
 ##  Decribes functions to transform a reconciled tree in 
 ##  NOTUNG format into a tree in the recPhyloXML format
@@ -179,7 +179,7 @@ def read_leaf(s):
     if isSpeciationNode(leafNode):
         setNodeAsLeaf(leafNode)
 
-    if not isLeafNode(leafNode):
+    if ( not isLeafNode(leafNode) ) and (not isLossNode(leafNode)):
         AddLeafEvent(leafNode)
 
     return leafNode
@@ -245,8 +245,8 @@ def readNotungParenthesis(s):
         c  = childrenNodes[j]
         if isLossNode(c):
             hasLoss = True
-            childrenNodes.pop(j)
-            continue
+            #childrenNodes.pop(j)
+            #continue
         if isTransferBackNode(c):
             hasTransfer = True
         j +=1
@@ -255,8 +255,8 @@ def readNotungParenthesis(s):
     if hasTransfer:
         setNodeAsTransfer(IntNode)
 
-    if hasLoss:
-        setNodeAsXloss(IntNode)
+    #if hasLoss:
+    #    setNodeAsXloss(IntNode)
 
     if len(childrenNodes) > 1:
         ## two or more children, add them

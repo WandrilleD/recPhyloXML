@@ -164,6 +164,7 @@ void ReconciledTree::setNodeDetailsFromXMLLine(int Nodeid, string Tname, map <st
     }
     else if(Tname.compare("speciationOutLoss") == 0)
     {
+        cerr << "deprecated " << Tname << " tag detected. auto-updated to independent loss version." <<endl;
         evtCode = Sout;
         //create some Loss son in the same species, with the same time slice
 
@@ -180,11 +181,16 @@ void ReconciledTree::setNodeDetailsFromXMLLine(int Nodeid, string Tname, map <st
     }
     else if(Tname.compare("speciationLoss") == 0)
     {
+        cerr << "deprecated " << Tname << " tag detected. auto-updated to independent loss version." <<endl;
         evtCode = S;
         //create some Loss son, but in a unknown species... with time slice = current -1
         // The loss node will be added in a later post-treatment phase as it requires a species tree to determine in which species the loss is. 
         // This won't get forgotten as these are speciations nodes with only one son
 
+    }
+    else if(Tname.compare("loss") == 0)
+    {
+        evtCode = L;
     }
 
     if(evtCode == -1)
