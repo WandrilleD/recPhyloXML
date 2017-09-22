@@ -74,7 +74,7 @@ def MakeLossIndependentNode( node , LossIndex , lostSpecies = "", lostTS = None,
     # 5. editing the event
 
     e = node.eventRecs[LossIndex].eventCode
-    node.eventRecs[LossIndex].eventCode = e.rpartition("Loss")[0]
+    node.eventRecs[LossIndex].eventCode = e[:-1]
 
     return
 
@@ -91,12 +91,13 @@ def ConvertRTtoLossIndepVersion(RT , speciesTree = None, keptChildNameSuffix = "
 
     for i, e in enumerate(RT.eventRecs):
 
-        if e.eventCode.endswith("Loss"):
+        if len(e.eventCode)>1 and e.eventCode.endswith("L"):
 
             species = ""
 
             if not speciesTree is None:
                 species = RT.getLostSpecies( i , speciesTree)
+                
 
             lostTS = e.timeSlice
             if not lostTS is None:

@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        19-Jul-2017         
-##  Last modified:  20-Sept-2017         
+##  Last modified:  22-Sept-2017         
 ## 
 ##  Decribes one classe : recPhyloXML_parser
 ##          which enables the reading of recPhyloXML files 
@@ -21,7 +21,9 @@
 import ete3 
 import xml.etree.ElementTree as ET
 
-from ReconciledTree import ReconciledTree, RecEvent, ReconciledTreeList
+from ReconciledTree import ReconciledTree, RecEvent, ReconciledTreeList , EVENTTAGCORRESPONDANCE
+
+REVERSE_EVENTTAGCORRESPONDANCE = {v:k for k,v in EVENTTAGCORRESPONDANCE.items()}
 
 
 OBSOLETE_EVENT_TAGS = ["speciationLoss", "speciationOutLoss" ] #  will give a warning 
@@ -41,7 +43,7 @@ class recPhyloXML_parser:
 
         Takes:
             - fileName (str) : name of a recPhyloXML file containing a single reconciled gene tree
-            - obsoleteTagsBehaviour (int) [default = 1]: Beahviour when an event tag that is in OBSOLETE_EVENT_TAGS is encountered
+            - obsoleteTagsBehaviour (int) [default = 1]: Behaviour when an event tag that is in OBSOLETE_EVENT_TAGS is encountered
                                                          0 : ignore
                                                          1 : warning
                                                          2 : throw exception
@@ -378,6 +380,9 @@ class recPhyloXML_parser:
 
                     if obsoleteTagsBehaviour>1:
                         raise Exception("ERROR. obsolete tag " + evtCode + " encoutered")
+
+
+            evtCode = REVERSE_EVENTTAGCORRESPONDANCE.get(evtCode, evtCode) ## replace by special code when known tag, otherwise keep as is
 
             species = None
             speciesTAGs  = ["destinationSpecies" , "speciesLocation"]

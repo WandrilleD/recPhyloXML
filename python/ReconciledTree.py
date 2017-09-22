@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        13-Jan-2017         
-##  Last modified:  20-Sept-2017         
+##  Last modified:  22-Sept-2017         
 ## 
 ##  Decribes 3 classes : RecEvent, ReconciledTree and ReconciledTreeList
 ##  the ReconciledTree class represent a reconciled gene tree and 
@@ -122,6 +122,7 @@ class RecEvent:
 
 
     def makeRecXMLstr(self , speciesNames):
+
         if self.eventCode == "N":
             return ""
 
@@ -159,6 +160,7 @@ class RecEvent:
         S += ">"
         S += "</" + eventName + ">"
         
+        #print self.eventCode , "->", S
         return S
 
 
@@ -338,8 +340,11 @@ class ReconciledTree(ete3.TreeNode):
                 report = True
 
             elif evtCode == EVENTTAGCORRESPONDANCE["D"] or evtCode =="D":
+                evtCode = "duplication"
                 report = True
+
             elif evtCode == EVENTTAGCORRESPONDANCE["L"] or evtCode =="L":
+                evtCode = "loss"
                 report = True
 
             if report: ##reporting duplication or loss
@@ -402,12 +407,13 @@ class ReconciledTree(ete3.TreeNode):
             None : if the indicated event does not correspond to a loss
         """
 
+
         evtCode = self.getEvent(evtIndex).eventCode
 
-        if not evtCode in [ EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["SoL"] ]:
+        if not evtCode in [ "SL","SoL",EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["SoL"] ]:
             return None
 
-        if evtCode == EVENTTAGCORRESPONDANCE["SoL"]:
+        if evtCode in ('SoL', EVENTTAGCORRESPONDANCE["SoL"]):
             return self.getEvent(evtIndex).species ## in speciationouLoss, the species of the lost lineage is the same as the one of the speciationOut
 
         ## We know this is a speciationLoss event.
@@ -424,6 +430,7 @@ class ReconciledTree(ete3.TreeNode):
         lostSpeciesNode = Speciesnode[0].get_sisters()[0]
 
         lostSpeciesId = getattr(lostSpeciesNode, speciesIdFeature)
+
 
         return lostSpeciesId
 
@@ -574,12 +581,12 @@ class ReconciledTreeList:
         for RT in self.recTrees:
             tmp = RT.getEventsSummary(self.spTree , includeTransferReception , includeTransferDeparture , speciesIdFeature)
 
-            print RT
-            print tmp
+            
 
             for k,v in tmp.items():
                 EventsSummary[k] += v
 
+        
 
 
         if indexBySpecies:
@@ -589,6 +596,8 @@ class ReconciledTreeList:
             for n in self.spTree.traverse():
 
                 tmp[ getattr(n,speciesIdFeature) ] = {}
+
+            
 
             for e in EventsSummary.keys():
 

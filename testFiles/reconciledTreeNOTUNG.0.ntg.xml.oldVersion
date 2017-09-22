@@ -39,31 +39,20 @@
           <clade>
             <name>r21</name>
             <eventsRec>
-              <speciation speciesLocation="n28"></speciation>
+              <speciationLoss speciesLocation="n28"></speciationLoss>
+              <duplication speciesLocation="HUMAN"></duplication>
             </eventsRec>
             <clade>
-              <name>LOSS</name>
+              <name>gB_human</name>
               <eventsRec>
-                <loss speciesLocation="GORILLA"></loss>
+                <leaf speciesLocation="HUMAN" geneName="gB_human"></leaf>
               </eventsRec>
             </clade>
             <clade>
-              <name>r21.c</name>
+              <name>gA_human</name>
               <eventsRec>
-                <duplication speciesLocation="HUMAN"></duplication>
+                <leaf speciesLocation="HUMAN" geneName="gA_human"></leaf>
               </eventsRec>
-              <clade>
-                <name>gB_human</name>
-                <eventsRec>
-                  <leaf speciesLocation="HUMAN" geneName="gB_human"></leaf>
-                </eventsRec>
-              </clade>
-              <clade>
-                <name>gA_human</name>
-                <eventsRec>
-                  <leaf speciesLocation="HUMAN" geneName="gA_human"></leaf>
-                </eventsRec>
-              </clade>
             </clade>
           </clade>
           <clade>
