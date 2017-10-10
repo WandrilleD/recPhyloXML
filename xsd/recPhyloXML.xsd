@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<xsd:schema
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:phy="http://www.phyloxml.org"
+  xmlns:rec="http://www.recgenetreexml.org"
+  targetNamespace="http://www.recg.org"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.recgenetreexml.org" schemaLocation="./recGeneTreeXML.xsd"/>
+  <xsd:import namespace="http://www.phyloxml.org" schemaLocation="./phyloxml.xsd"/>
+
+  <xsd:element name="recPhylo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="spTree" minOccurs="0" maxOccurs="1" type="phy:Phyloxml"/>
+        <xsd:element name="recGeneTree" minOccurs="1" maxOccurs="unbounded" type="rec:Recgenetreexml"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>
