@@ -1,0 +1,148 @@
+<recPhylo>
+  <spTree>
+    <phylogeny>
+    <clade>
+      <name>ABCD</name>
+      <clade>
+        <name>D</name>
+      </clade>
+      <clade>
+        <name>ABC</name>
+        <clade>
+          <name>C</name>
+        </clade>
+        <clade>
+          <name>AB</name>
+          <clade>
+            <name>B</name>
+          </clade>
+          <clade>
+            <name>A</name>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+    </phylogeny>
+  </spTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <id>0</id>
+      <clade>
+        <name>0</name>
+        <eventsRec>
+          <speciation speciesLocation="ABCD"></lineageSorting>
+        </eventsRec>
+        <clade>
+          <name>LOST_1</name>
+          <eventsRec>
+            <loss speciesLocation="D"></loss>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>1<name>
+          <eventsRec>
+            <lineageSeparation speciesLocation="ABC">
+          </eventsRec>
+          <clade>
+            <name>2</name>
+            <eventsRec>
+              <asymetricalSpeciation speciesLocation="ABC"></asymetricalSpeciation>
+              <duplication speciesLocation="AB"></duplication>
+            </eventsRec>
+            <clade>
+              <name>LOST_2</name>
+              <eventsRec>
+                <loss speciesLocation="AB"></loss>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>3</name>
+              <eventsRec>
+                <speciation speciesLocation="AB"></speciation>
+              </eventsRec>
+              <clade>
+                <name>LOST_3</name>
+                <eventsRec>
+                  <loss speciesLocation="A"></loss>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>4</name>
+                <eventsRec>
+                  <duplication speciesLocation="B"></duplication> 
+                </eventsRec>
+                <clade>
+                  <name>Bbeta</name>
+                  <eventsRec>
+                    <leaf speciesLocation="B"><leaf>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>Balpha</name>
+                  <eventsRec>
+                    <leaf speciesLocation="B" converting="LOST_4"><leaf><!-- temporary format for conversions -->
+                  </eventsRec>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>5</name>
+            <eventsRec>
+              <speciation speciesLocation="ABC"></speciation>
+            <eventsRec>
+            <clade>
+              <name>6</name>
+              <eventsRec>
+                <speciationOut speciesLocation="C"></speciationOut>
+              <eventsRec>
+              <clade>
+                <name>Calpha</name>
+                <eventsRec>
+                  <leaf speciesLocation="C"></leaf>
+                <eventsRec>
+              </clade>
+              <clade>
+                <name>Dalpha</name>
+                <eventsRec>
+                  <transferBack destinationSpecies="D" converting="LOST_1"></transferBack><!-- temporary format for conversions -->
+                  <lineageSeparation speciesLocation="D"></lineageSeparation>
+                </eventsRec>
+                <clade>
+                  <name>Dalpha0</name>
+                  <eventsRec>
+                    <leaf speciesLocation="D"></leaf>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>Dalpha1</name>
+                  <eventsRec>
+                    <leaf speciesLocation="D"></leaf>
+                  </eventsRec>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>7</name>
+              <eventsRec>
+                <speciation speciesLocation="AB"></speciation>
+              <eventsRec>
+              <clade>
+                <name>LOST_4</name>
+                <eventsRec>
+                  <loss speciesLocation="B"></loss>
+                <eventsRec>
+              </clade>
+              <clade>
+                <name>Aalpha0</name>
+                <eventsRec>
+                  <leaf speciesLocation="A"></leaf>
+                <eventsRec>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+</recPhylo>

@@ -1,0 +1,93 @@
+<recPhylo>
+  <spTree>
+    <phylogeny>
+    <clade>
+      <name>ABC</name>
+      <clade>
+        <name>A</name>
+      </clade>
+      <clade>
+        <name>BC</name>
+        <clade>
+          <name>B</name>
+        </clade>
+        <clade>
+          <name>C</name>
+        </clade>
+      </clade>
+    </clade>
+    </phylogeny>
+  </spTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <id>0</id>
+      <clade>
+        <name>abc</name>
+        <eventsRec>
+          <speciation speciesLocation="ABC"></lineageSorting>
+        <eventsRec>
+        <clade>
+          <name>a</name>
+          <eventsRec>
+            <leaf speciesLocation="A"></leaf>
+          <eventsRec>
+        </clade>
+        <clade>
+          <name>bc</name>
+          <eventsRec>
+            <speciation speciesLocation="BC"></speciation>
+          <eventsRec>
+          <clade>
+            <name>b</name>
+            <eventsRec>
+              <leaf speciesLocation="B"></leaf>
+            <eventsRec>
+          </clade>
+          <clade>
+            <name>c</name>
+            <eventsRec>
+              <leaf speciesLocation="C"></leaf>
+            <eventsRec>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+  <locusTree referenceGeneTree="0">
+    <phylogeny rooted="true">
+      <clade>
+        <name>lineage_abc</name>
+        <eventsRec>
+          <lineageSorting geneLocation="abc"></lineageSorting>
+        <eventsRec>
+        <clade>
+          <name>lineage_ab</name>
+          <eventsRec>
+            <speciation geneLocation="abc"></speciation>
+          <eventsRec>
+          <clade>
+            <name>lineage_a</name>
+            <eventsRec>
+              <leaf geneLocation="a"></leaf>
+            <eventsRec>
+          </clade>
+          <clade>
+            <name>lineage_b</name>
+            <eventsRec>
+              <asymmetricalSpeciation geneLocation="bc"></asymmetricalSpeciation>
+              <leaf geneLocation="b"></leaf>
+            <eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>lineage_c</name>
+          <eventsRec>
+            <asymmetricalSpeciation geneLocation="abc"></asymmetricalSpeciation>
+            <asymmetricalSpeciation geneLocation="bc"></asymmetricalSpeciation>
+            <leaf geneLocation="c"></leaf>
+          <eventsRec>
+        </clade>
+      </clade>
+    </phylogeny>
+  <locusTree>
+</recPhylo>

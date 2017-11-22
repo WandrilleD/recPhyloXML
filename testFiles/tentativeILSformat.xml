@@ -1,0 +1,58 @@
+<recPhylo>
+  <spTree>
+    <phylogeny>
+    <clade>
+      <name>ABC</name>
+      <clade>
+        <name>A</name>
+      </clade>
+      <clade>
+        <name>BC</name>
+        <clade>
+          <name>B</name>
+        </clade>
+        <clade>
+          <name>C</name>
+        </clade>
+      </clade>
+    </clade>
+    </phylogeny>
+  </spTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <clade>
+        <name>abc</name>
+        <eventsRec>
+          <lineageSeparation speciesLocation="ABC"></lineageSorting>
+        <eventsRec>
+        <clade>
+          <name>ab</name>
+          <eventsRec>
+            <speciation speciesLocation="ABC"></speciation>
+          <eventsRec>
+          <clade>
+            <name>a</name>
+            <eventsRec>
+              <leaf speciesLocation="A"></leaf>
+            <eventsRec>
+          </clade>
+          <clade>
+            <name>b</name>
+            <eventsRec>
+              <asymmetricalSpeciation speciesLocation="BC"></asymmetricalSpeciation>
+              <leaf speciesLocation="B"></leaf>
+            <eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>c</name>
+          <eventsRec>
+            <asymmetricalSpeciation speciesLocation="ABC"></asymmetricalSpeciation>
+            <asymmetricalSpeciation speciesLocation="BC"></asymmetricalSpeciation>
+            <leaf speciesLocation="C"></leaf>
+          <eventsRec>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+</recPhylo>

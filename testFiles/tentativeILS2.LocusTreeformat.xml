@@ -1,0 +1,194 @@
+<recPhylo>
+  <spTree>
+    <phylogeny>
+    <clade>
+      <name>ABCD</name>
+      <clade>
+        <name>D</name>
+      </clade>
+      <clade>
+        <name>ABC</name>
+        <clade>
+          <name>C</name>
+        </clade>
+        <clade>
+          <name>AB</name>
+          <clade>
+            <name>B</name>
+          </clade>
+          <clade>
+            <name>A</name>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+    </phylogeny>
+  </spTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <id>0</id>
+      <clade>
+        <name>0</name>
+        <eventsRec>
+          <speciation speciesLocation="ABCD"></lineageSorting>
+        <eventsRec>
+        <clade>
+          <name>LOST_1</name>
+          <eventsRec>
+            <loss speciesLocation="D"></loss>
+          <eventsRec>
+        </clade>
+        <clade>
+          <name>1</name>
+          <eventsRec>
+            <speciation speciesLocation="ABC"></speciation>
+          <eventsRec>
+          <clade>
+            <name>2</name>
+            <eventsRec>
+              <speciationOut speciesLocation="C"></speciationOut>
+            <eventsRec>
+            <clade>
+              <name>Calpha</name>
+              <eventsRec>
+                <leaf speciesLocation="C"></leaf>
+              <eventsRec>
+            </clade>
+            <clade>
+              <name>Dalpha</name>
+              <eventsRec>
+                <transferBack destinationSpecies="D" converting="LOST_1"></transferBack><!-- temporary format for conversions -->
+                <leaf speciesLocation="D"></leaf>
+              <eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>3</name>
+            <eventsRec>
+              <duplication speciesLocation="AB"></duplication>
+            <eventsRec>
+            <clade>
+              <name>4</name>
+              <eventsRec>
+                <speciation speciesLocation="AB"></speciation>
+              <eventsRec>
+              <clade>
+                <name>LOST_2</name>
+                <eventsRec>
+                  <loss speciesLocation="A"></loss>
+                <eventsRec>
+              </clade>
+              <clade>
+                <name>5</name>
+                <eventsRec>
+                  <duplication speciesLocation="B"></duplication> 
+                <eventsRec>
+                <clade>
+                  <name>Bbeta</name>
+                  <eventsRec>
+                    <leaf speciesLocation="B"><leaf>
+                  <eventsRec>
+                </clade>
+                <clade>
+                  <name>Balpha</name>
+                  <eventsRec>
+                    <leaf speciesLocation="B" converting="LOST_3"><leaf><!-- temporary format for conversions -->
+                  <eventsRec>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>6</name>
+              <eventsRec>
+                <speciation speciesLocation="AB"></speciation>
+              <eventsRec>
+              <clade>
+                <name>LOST_3</name>
+                <eventsRec>
+                  <loss speciesLocation="B"></loss>
+                <eventsRec>
+              </clade>
+              <clade>
+                <name>Aalpha</name>
+                <eventsRec>
+                  <leaf speciesLocation="A"></leaf>
+                <eventsRec>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+  <locusTree referenceGeneTree="0">
+    <phylogeny rooted="true">
+      <clade>
+        <name>lineage_abcd</name>
+        <eventsRec>
+          <coalescence geneLocation="1"></coalescence>
+        </eventsRec>
+        <clade>
+          <name>lineage_B_beta_alpha</name>
+          <eventsRec>
+            <coalescence geneLocation="5"></coalescence>
+          </eventsRec>
+          <clade>
+            <name>Bbeta0</name>
+            <eventsRec>
+              <leaf geneLocation="Bbeta"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>Balpha0</name>
+            <eventsRec>
+              <leaf geneLocation="Balpha"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>lineage_acd</name>
+          <eventsRec>
+            <coalescence geneLocation="1"></coalescence>
+          </eventsRec>
+          <clade>
+            <name>Aalpha0</name>
+            <eventsRec>
+              <leaf geneLocation="Aalpha"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>lineage_cd</name>
+            <eventsRec>
+              <coalescence geneLocation="2"></coalescence>
+            </eventsRec>
+            <clade>
+              <name>Calpha0</name>
+              <eventsRec>
+                <leaf geneLocation="Calpha"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>lineage_d</name>
+              <eventsRec>
+                <coalescence geneLocation="Dalpha"></leaf>
+              </eventsRec>
+              <clade>
+                <name>Dalpha0</name>
+                <eventsRec>
+                  <leaf geneLocation="Dalpha"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>Dalpha1</name>
+                <eventsRec>
+                  <leaf geneLocation="Dalpha"></leaf>
+                </eventsRec>
+              </clade>
+
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  <locusTree>
+</recPhylo>
