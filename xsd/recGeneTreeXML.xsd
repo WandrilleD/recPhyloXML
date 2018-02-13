@@ -94,13 +94,13 @@
         <xsd:documentation> Event at a node of a gene story </xsd:documentation>
      </xsd:annotation>
      <xsd:sequence>
-        <xsd:group ref="rec:EventsLost"/>
+        <xsd:group ref="rec:IntermediaryEvents"/>
         <xsd:group ref="rec:EndEvents"/>
      </xsd:sequence>
   </xsd:complexType>
 
 
-  <xsd:group name="EventsLost">
+  <xsd:group name="IntermediaryEvents">
      <xsd:sequence>
         <xsd:choice minOccurs="0" maxOccurs="unbounded" >
             <!-- No end events :-->
@@ -171,7 +171,7 @@
      <xsd:attribute name="confidence" type="xsd:double" use="optional"/>
   </xsd:complexType>
 
-  <!-- rec:LeafRec:-->
+  <!-- rec:LossRec:-->
   <xsd:complexType name="LossRec">
      <xsd:annotation>
         <xsd:documentation>gene loss event</xsd:documentation>
@@ -185,7 +185,7 @@
   <!-- rec:TransferBackRec:-->
   <xsd:complexType name="TransferBackRec">
      <xsd:annotation>
-        <xsd:documentation>Speciation event</xsd:documentation>
+        <xsd:documentation>Transfer back event</xsd:documentation>
      </xsd:annotation>
      <xsd:attribute name="destinationSpecies" type="xsd:string" />
      <xsd:attribute name="timeSlice" type="xsd:integer" use="optional"/>
