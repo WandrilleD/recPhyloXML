@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<xsd:schema
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:phy="http://www.phyloxml.org"
+  xmlns:kml="http://schemas.opengis.net/kml/2.3/ogckml23.xsd"
+  xmlns:geo="http://www.recgeoxml.org"
+  targetNamespace="http://www.recgeoxml.org"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.phyloxml.org" schemaLocation="./phyloxml.xsd"/>
+  <xsd:import namespace="http://schemas.opengis.net/kml/2.3/ogckml23.xsd" schemaLocation="./ogckml23.xsd"/>
+
+
+
+
+
+<!-- type geo:Geography -->
+  <xsd:complexType name="Geography">
+     <xsd:annotation>
+        <xsd:documentation> Element Geography contains geographical annotations: mainly an area as defined below, KML information (optional) for displaying areas in GIS software and geographic information (optional) as defined in the phyloXML schema. </xsd:documentation>
+     </xsd:annotation>
+     <xsd:sequence>
+	<xsd:element name="area" type="geo:Area" /> 
+	<xsd:element name="KML_location" type="kml:PlacemarkType" minOccurs="0" />  
+        <xsd:element name="phyloXML_location" type="phy:Distribution" minOccurs="0" />
+     </xsd:sequence>
+  </xsd:complexType>
+
+<!-- type geo:Area-->
+<xsd:complexType name="Area">
+     <xsd:annotation>
+        <xsd:documentation> Element Area is specified by a name, a description (free text), a value (e.g. support) and a source (e.g. "observed" or "inferred by Beast"). </xsd:documentation>
+     </xsd:annotation>
+    <xsd:sequence>
+      	<xsd:element name="name" type="xsd:string" />
+    	<xsd:element name="desc" type="xsd:string" minOccurs="0" />
+    	<xsd:element name="value" type="xsd:double" minOccurs="0" />
+	<xsd:element name="source" type="xsd:string" minOccurs="0" />
+ </xsd:sequence>
+</xsd:complexType>
+
+
+ </xsd:schema>
