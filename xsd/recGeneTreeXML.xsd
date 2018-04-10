@@ -94,13 +94,13 @@
         <xsd:documentation> Event at a node of a gene story </xsd:documentation>
      </xsd:annotation>
      <xsd:sequence>
-        <xsd:group ref="rec:EventsLost"/>
+        <xsd:group ref="rec:nonEndEvents"/>
         <xsd:group ref="rec:EndEvents"/>
      </xsd:sequence>
   </xsd:complexType>
 
 
-  <xsd:group name="EventsLost">
+  <xsd:group name="nonEndEvents">
      <xsd:sequence>
         <xsd:choice minOccurs="0" maxOccurs="unbounded" >
             <!-- No end events :-->
@@ -113,7 +113,7 @@
      <xsd:choice>
          <!-- End events:-->
         <xsd:element name="speciation" type="rec:SpeciationRec"/>
-        <xsd:element name="speciationOut" type="rec:SpeciationOutRec"/>
+        <xsd:element name="branchingOut" type="rec:BranchingOutRec"/>
         <xsd:element name="bifurcationOut" type="rec:BifurcationOutRec"/>
         <xsd:element name="duplication" type="rec:DuplicationRec"/>
         <xsd:element name="leaf" type="rec:LeafRec"/>
@@ -132,10 +132,10 @@
      <xsd:attribute name="confidence" type="xsd:double" use="optional"/>
   </xsd:complexType>
 
-  <!-- rec:SpeciationOutRec:-->
-  <xsd:complexType name="SpeciationOutRec">
+  <!-- rec:BranchingOutRec:-->
+  <xsd:complexType name="BranchingOutRec">
      <xsd:annotation>
-        <xsd:documentation>Speciation out event, it happen when a transfer will occurs between a death specie and another (dead or existing)</xsd:documentation>
+        <xsd:documentation>Branching out event, it happen when a gene lineage leaves a species via HGT</xsd:documentation>
      </xsd:annotation>
      <xsd:attribute name="speciesLocation" type="xsd:string" />
      <xsd:attribute name="timeSlice" type="xsd:integer" use="optional"/>
@@ -151,7 +151,7 @@
      <xsd:attribute name="confidence" type="xsd:double" use="optional"/>
   </xsd:complexType>
 
-  <!-- rec:Speciationrec:-->
+  <!-- rec:DuplicationRec:-->
   <xsd:complexType name="DuplicationRec">
      <xsd:annotation>
         <xsd:documentation>Duplication event</xsd:documentation>
@@ -171,7 +171,7 @@
      <xsd:attribute name="confidence" type="xsd:double" use="optional"/>
   </xsd:complexType>
 
-  <!-- rec:LeafRec:-->
+  <!-- rec:LossRec:-->
   <xsd:complexType name="LossRec">
      <xsd:annotation>
         <xsd:documentation>gene loss event</xsd:documentation>
@@ -185,7 +185,7 @@
   <!-- rec:TransferBackRec:-->
   <xsd:complexType name="TransferBackRec">
      <xsd:annotation>
-        <xsd:documentation>Speciation event</xsd:documentation>
+        <xsd:documentation>Event where a gene lineage enters a species via HGT</xsd:documentation>
      </xsd:annotation>
      <xsd:attribute name="destinationSpecies" type="xsd:string" />
      <xsd:attribute name="timeSlice" type="xsd:integer" use="optional"/>
