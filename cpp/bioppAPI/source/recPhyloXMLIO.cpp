@@ -241,9 +241,9 @@ void WritePhyloXMLRecEvent(ostream& OUT, ReconciledTree * Rtree, Node * node, in
     {
         eventString = "duplication";
     }
-    else if(Rtree->isSout(event))
+    else if(Rtree->isBrout(event))
     {
-        eventString = "speciationOut";
+        eventString = "branchingOut";
     }
     else if(Rtree->isRec(event))
     {
