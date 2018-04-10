@@ -3,7 +3,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin
 ##  Created:        20-June-2016
-##  Last modified:  20-Sept-2017
+##  Last modified:  10-Apr-2018
 ##
 ##  Decribes functions to transform a reconciled tree in
 ##  NHX format into a tree in the recPhyloXML format
@@ -140,7 +140,7 @@ def parse_node_annotation(node_annotation, isLeaf = False, isDead = False, isUnd
                     source_ts = int(source_ts)
 
                 ##adding the event
-                l_events.append( RecEvent( "So" , source_sp , source_ts ) )
+                l_events.append( RecEvent( "bro" , source_sp , source_ts ) )
 
 
             if ann.startswith("@"): # or ann.startswith("Tb@"):##transfer in or back
@@ -190,7 +190,7 @@ def parse_node_annotation(node_annotation, isLeaf = False, isDead = False, isUnd
 
     ##adding loss labels
     for i in range(len(l_events)-1):##all events but the last one
-        if l_events[i].eventCode in ["So","S"]:
+        if l_events[i].eventCode in ["bro","S"]:
             l_events[i].eventCode += "L"
 
 
@@ -318,7 +318,7 @@ def refineReconciledTreeWithTransferBack(RT):
 
         lastEventParent = n.up.getEvent(-1)
 
-        if lastEventParent.eventCode in ["speciationOut", "So"]:
+        if lastEventParent.eventCode in ["branchingOut", "bro"]:
             ## parent is an outgoing transfer
 
             firstEvent = n.getEvent(0)
@@ -403,7 +403,7 @@ def MakeLossIndependentNode( node , LossIndex , lostSpecies = "", lostTS = None,
 
     Takes:
          - node (ReconciledTree): reconciled node where the *Loss event occurs
-         - LossIndex (int): index of the speciationLoss or speciationOutLoss event
+         - LossIndex (int): index of the speciationLoss or branchingOutLoss event
          - lostSpecies (str) [default = ""] : species of the loss
          - lostTS (int) [default = None]: timeSlice is the loss
          - lostAdditional [default = {}]: additional information to give to the new loss event

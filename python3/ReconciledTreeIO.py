@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin
 ##  Created:        19-Jul-2017
-##  Last modified:  22-Sept-2017
+##  Last modified:  10-Apr-2018
 ##
 ##  Decribes one classe : recPhyloXML_parser
 ##          which enables the reading of recPhyloXML files
@@ -25,8 +25,11 @@ from ReconciledTree import ReconciledTree, RecEvent, ReconciledTreeList , EVENTT
 
 REVERSE_EVENTTAGCORRESPONDANCE = {v:k for k,v in EVENTTAGCORRESPONDANCE.items()}
 
+##allow reading of old speciationOut tags and redirecting them toward the new branchingOut
+REVERSE_EVENTTAGCORRESPONDANCE["speciationOut"] = "bro"
+REVERSE_EVENTTAGCORRESPONDANCE["speciationLoss"] = "broL"
 
-OBSOLETE_EVENT_TAGS = ["speciationLoss", "speciationOutLoss" ] #  will give a warning
+OBSOLETE_EVENT_TAGS = ["speciationLoss", "speciationOutLoss", "speciationOut" ] #  will give a warning
 
 def OBSOLETEWARNINGTXT(tag):
     return  "The obsolete tag "+tag+" was observed and this may result in unwanted behaviour. Please use a conversion script such as convertToLossIndependentVersion.py to update your file to a newest verszion of the format."
