@@ -94,13 +94,13 @@
         <xsd:documentation> Event at a node of a gene story </xsd:documentation>
      </xsd:annotation>
      <xsd:sequence>
-        <xsd:group ref="rec:nonEndEvents"/>
+        <xsd:group ref="rec:IntermediaryEvents"/>
         <xsd:group ref="rec:EndEvents"/>
      </xsd:sequence>
   </xsd:complexType>
 
 
-  <xsd:group name="nonEndEvents">
+  <xsd:group name="IntermediaryEvents">
      <xsd:sequence>
         <xsd:choice minOccurs="0" maxOccurs="unbounded" >
             <!-- No end events :-->
