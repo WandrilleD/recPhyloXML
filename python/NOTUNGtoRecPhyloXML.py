@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        22-Mar-2017         
-##  Last modified:  20-Sept-2017        
+##  Last modified:  10-Apr-2018        
 ##
 ##  Decribes functions to transform a reconciled tree in 
 ##  NOTUNG format into a tree in the recPhyloXML format
@@ -76,11 +76,11 @@ def setNodeAsLeaf(node):
 
 
 def setNodeAsTransfer(node):
-    """ transform a S into a So event """
-    node.getEvents()[0].eventCode = "So"
+    """ transform a S into a bro event """
+    node.getEvents()[0].eventCode = "bro"
 
 def setNodeAsXloss(node):
-    """ transform a S into a SL event, a So into a SoL, ... """
+    """ transform a S into a SL event, a bro into a broL, ... """
     node.getEvents()[0].eventCode += "L"
 
 
@@ -126,11 +126,11 @@ def NotungAnnotationToRecEvent(annot):
 
 
     if evtType is None:
-        # speciation, speciationOut or Loss or leaf!
+        # speciation, branchingOut or Loss or leaf!
         if annot["name"].endswith("*LOST"):
             evtType = "L"
         else:
-            evtType = "S" ## between leaf, S and So, always put S and we'll complement later
+            evtType = "S" ## between leaf, S and bro, always put S and we'll complement later
 
     if ( sp is None ) or (evtType is None):
         print "error when trying to assign event. data:", annot

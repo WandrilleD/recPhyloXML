@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        13-Jan-2017         
-##  Last modified:  22-Sept-2017         
+##  Last modified:  10-Apr-2018        
 ## 
 ##  Decribes 3 classes : RecEvent, ReconciledTree and ReconciledTreeList
 ##  the ReconciledTree class represent a reconciled gene tree and 
@@ -79,11 +79,13 @@ EVENTTAGCORRESPONDANCE = {    "D" : "duplication",
                         "L":"loss",
 
                         "Bo": "bifurcationOut",
-                        "So": "speciationOut",
+                        #"So": "branchingOut",
+                        "bro": "branchingOut",
                         "Tb": "transferBack",
 
                         "SL": "speciationLoss",
-                        "SoL": "speciationOutLoss"
+                        #"SoL": "branchingOutLoss",
+                        "broL": "branchingOutLoss",
                         }
 
 class RecEvent:
@@ -334,7 +336,7 @@ class ReconciledTree(ete3.TreeNode):
             reportTD = False
             reportTR = False
 
-            if ( evtCode in ( EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["SoL"] ) ) or (evtCode in ( "SL", "SoL" )):
+            if ( evtCode in ( EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["broL"] ) ) or (evtCode in ( "SL", "broL" )):
                 species = self.getLostSpecies( i , speciesTree, speciesIdFeature)
                 evtCode = "loss"
                 report = True
@@ -355,7 +357,7 @@ class ReconciledTree(ete3.TreeNode):
                 evtCode = "transferReception"
                 EventsSummary[evtCode].append(species)
 
-            elif includeTransferDeparture and ( (evtCode in [ EVENTTAGCORRESPONDANCE["So"] , EVENTTAGCORRESPONDANCE["SoL"] ] ) or ( evtCode in [ "So", "SoL" ]) ):
+            elif includeTransferDeparture and ( (evtCode in [ EVENTTAGCORRESPONDANCE["bro"] , EVENTTAGCORRESPONDANCE["broL"] ] ) or ( evtCode in [ "bro", "broL" ]) ):
                 evtCode = "transferDeparture"
                 EventsSummary[evtCode].append(species)
 
@@ -410,10 +412,10 @@ class ReconciledTree(ete3.TreeNode):
 
         evtCode = self.getEvent(evtIndex).eventCode
 
-        if not evtCode in [ "SL","SoL",EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["SoL"] ]:
+        if not evtCode in [ "SL","broL",EVENTTAGCORRESPONDANCE["SL"] , EVENTTAGCORRESPONDANCE["broL"] ]:
             return None
 
-        if evtCode in ('SoL', EVENTTAGCORRESPONDANCE["SoL"]):
+        if evtCode in ('broL', EVENTTAGCORRESPONDANCE["broL"]):
             return self.getEvent(evtIndex).species ## in speciationouLoss, the species of the lost lineage is the same as the one of the speciationOut
 
         ## We know this is a speciationLoss event.

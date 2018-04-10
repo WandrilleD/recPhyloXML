@@ -31,7 +31,7 @@
             <clade>
               <name>.4.2.T@1|a.c.c</name>
               <eventsRec>
-                <speciationOut speciesLocation="a" ts="1"></speciationOut>
+                <branchingOut speciesLocation="a" ts="1"></branchingOut>
               </eventsRec>
               <clade>
                 <name>a_a1</name>
@@ -62,7 +62,7 @@
             <clade>
               <name>T@4|g</name>
               <eventsRec>
-                <speciationOut speciesLocation="g" ts="4"></speciationOut>
+                <branchingOut speciesLocation="g" ts="4"></branchingOut>
               </eventsRec>
               <clade>
                 <name>Tb@3|3</name>
@@ -106,7 +106,7 @@
             <clade>
               <name>g_g3</name>
               <eventsRec>
-                <speciationOut speciesLocation="3" ts="4"></speciationOut>
+                <branchingOut speciesLocation="3" ts="4"></branchingOut>
               </eventsRec>
               <clade>
                 <name>LOSS</name>

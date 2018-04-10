@@ -5,7 +5,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        12-Sept-2017         
-##  Last modified:  12-Sept-2017        
+##  Last modified:  10-Apr-2018        
 ##
 ##  
 ##  This script is used to extract a summary of events count per species
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
                             -o outputFile               : (optional) file to write in (by default stdout will be used)
 
-                            --include.transfer.departure: (optional) if true, transfer departure (or speciationOut) events will be counted
+                            --include.transfer.departure: (optional) if true, transfer departure (or branchingOut) events will be counted
 
                """
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     params = {
                 "-i" : None, #: input recPhyloXML file
                 "-o" : None, #: (optional) file to write in (by default stdout will be used)
-                "--include.transfer.departure" : False #(optional) if true, transfer departure (or speciationOut) events will be counted
+                "--include.transfer.departure" : False #(optional) if true, transfer departure (or branchingOut) events will be counted
             }
 
     flagArgs = ["--include.transfer.departure"]
