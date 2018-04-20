@@ -3,20 +3,22 @@
 <xsd:schema
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:phy="http://www.phyloxml.org"
+  xmlns:geo="http://www.recgeoxml.org"
   xmlns:rec="http://www.recgenetreexml.org"
   targetNamespace="http://www.recgenetreexml.org"
   elementFormDefault="qualified"
   attributeFormDefault="unqualified">
 
-  <xsd:import namespace="http://www.phyloxml.org" schemaLocation="./phyloxml.xsd"/>
+ <xsd:import namespace="http://www.phyloxml.org" schemaLocation="./phyloxml.xsd"/>
+ <xsd:import namespace="http://www.recgeoxml.org" schemaLocation="./recgeoxml.xsd"/>
 
-  <!-- phyloxml is the root element:-->
+
+  <!-- recGeneTree is the root element:-->
   <xsd:element name="recGeneTree" type="rec:Recgenetreexml"/>
-  <!-- phyloXML definition:-->
+  <!-- recGeneTree definition:-->
   <xsd:complexType name="Recgenetreexml">
      <xsd:annotation>
-        <xsd:documentation> 'phyloxml' is the name of the root element. Phyloxml contains an arbitrary number of
-           'phylogeny' elements (each representing one phylogeny) possibly followed by elements from other namespaces.
+        <xsd:documentation> 'recGeneTree' is the name of the root element. Phyloxml contains an arbitrary number of 'phylogeny' elements (each representing one phylogeny) possibly followed by elements from other namespaces.
         </xsd:documentation>
      </xsd:annotation>
      <xsd:sequence maxOccurs="unbounded">
@@ -27,12 +29,7 @@
   <!-- Phylogeny:-->
   <xsd:complexType name="Phylogeny">
      <xsd:annotation>
-        <xsd:documentation> Element Phylogeny is used to represent a phylogeny. The required attribute 'rooted' is used
-           to indicate whether the phylogeny is rooted or not. The attribute 'rerootable' can be used to indicate that
-           the phylogeny is not allowed to be rooted differently (i.e. because it is associated with root dependent
-           data, such as gene duplications). The attribute 'type' can be used to indicate the type of phylogeny (i.e.
-           'gene tree'). It is recommended to use the attribute 'branch_length_unit' if the phylogeny has branch
-           lengths. Element clade is used in a recursive manner to describe the topology of a phylogenetic
+        <xsd:documentation> Element Phylogeny is used to represent a phylogeny. The required attribute 'rooted' is used to indicate whether the phylogeny is rooted or not. The attribute 'rerootable' can be used to indicate that the phylogeny is not allowed to be rooted differently (i.e. because it is associated with root dependent data, such as gene duplications). The attribute 'type' can be used to indicate the type of phylogeny (i.e. 'gene tree'). It is recommended to use the attribute 'branch_length_unit' if the phylogeny has branch lengths. Element clade is used in a recursive manner to describe the topology of a phylogenetic.
         tree.</xsd:documentation>
      </xsd:annotation>
      <xsd:sequence>
@@ -77,7 +74,7 @@
         <xsd:element name="events" type="phy:Events" minOccurs="0"/>
         <xsd:element name="eventsRec" type="rec:EventsRec" minOccurs="0"/>
         <xsd:element name="binary_characters" type="phy:BinaryCharacters" minOccurs="0"/>
-        <xsd:element name="distribution" type="phy:Distribution" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="geography" type="geo:Geography" minOccurs="0" maxOccurs="unbounded"/>
         <xsd:element name="date" type="phy:Date" minOccurs="0"/>
         <xsd:element name="reference" type="phy:Reference" minOccurs="0" maxOccurs="unbounded"/>
         <xsd:element name="property" type="phy:Property" minOccurs="0" maxOccurs="unbounded"/>
@@ -85,8 +82,10 @@
         <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" namespace="##other"/>
      </xsd:sequence>
      <xsd:attribute name="branch_length" type="xsd:double"/>
-     <xsd:attribute name="id_source" type="phy:id_source"/>
+    <xsd:attribute name="id_source" type="phy:id_source"/>
   </xsd:complexType>
+
+
 
   <!-- rec:Eventsrec:-->
   <xsd:complexType name="EventsRec">
@@ -191,6 +190,7 @@
      <xsd:attribute name="timeSlice" type="xsd:integer" use="optional"/>
      <xsd:attribute name="confidence" type="xsd:double" use="optional"/>
   </xsd:complexType>
+
 
 
 </xsd:schema>

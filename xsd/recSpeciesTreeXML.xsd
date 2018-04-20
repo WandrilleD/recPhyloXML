@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:phy="http://www.phyloxml.org"
+	xmlns:geo="http://www.recgeoxml.org"
+	xmlns:recSp="http://www.recspeciestreexml.org"
+	targetNamespace="http://www.recspeciestreexml.org" 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified">
+
+  	<xsd:import namespace="http://www.phyloxml.org" schemaLocation="./phyloxml.xsd"/>
+	<xsd:import namespace="http://www.recgeoxml.org" schemaLocation="./recgeoxml.xsd"/>
+
+
+
+   <!-- recSpeciesTree is the root element:-->
+   <xsd:element name="recSpeciesTree" type="recSp:RecSpeciesTreeXML"/>
+   <!-- recSpeciesTree definition:-->
+   <xsd:complexType name="Recspeciestreexml">
+      <xsd:annotation>
+         <xsd:documentation> 'recSpeciesTree' is the name of the root element. recSpeciesTree contains an arbitrary number of 'phylogeny' elements (each representing one phylogeny) possibly followed by elements from other namespaces.
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence maxOccurs="unbounded">
+         <xsd:element name="phylogeny" type="phy:Phylogeny" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" namespace="##other"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <!-- Phylogeny:-->
+   <xsd:complexType name="Phylogeny">
+      <xsd:annotation>
+         <xsd:documentation> Element Phylogeny is used to represent a phylogeny. The required attribute 'rooted' is used to indicate whether the phylogeny is rooted or not. The attribute 'rerootable' can be used to indicate that the phylogeny is not allowed to be rooted differently (i.e. because it is associated with root dependent data, such as gene duplications). The attribute 'type' can be used to indicate the type of phylogeny (i.e. 'gene tree'). It is recommended to use the attribute 'branch_length_unit' if the phylogeny has branch lengths. Element clade is used in a recursive manner to describe the topology of a phylogenetic.
+         tree.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="name" type="xsd:token" minOccurs="0"/>
+         <xsd:element name="id" type="phy:Id" minOccurs="0"/>
+         <xsd:element name="description" type="xsd:token" minOccurs="0"/>
+         <xsd:element name="date" type="xsd:dateTime" minOccurs="0"/>
+         <xsd:element name="confidence" type="phy:Confidence" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="clade" type="recSp:CladeSp" minOccurs="0"/>
+         <xsd:element name="clade_relation" type="phy:CladeRelation" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="sequence_relation" type="phy:SequenceRelation" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="property" type="phy:Property" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" namespace="##other"/>
+      </xsd:sequence>
+      <xsd:attribute name="rooted" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="rerootable" type="xsd:boolean"/>
+      <xsd:attribute name="branch_length_unit" type="xsd:token"/>
+      <xsd:attribute name="type" type="xsd:token"/>
+   </xsd:complexType>
+   <!-- Clade:-->
+   <xsd:complexType name="CladeSp">
+      <xsd:annotation>
+         <xsd:documentation> Element CladeSp is used in a recursive manner to describe the topology of a phylogenetic tree. This is mainly the phyloXML element where the geography information is more advanced than the Distribution element initially planed.
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="name" type="xsd:token" minOccurs="0"/>
+         <xsd:element name="branch_length" type="xsd:double" minOccurs="0"/>
+         <xsd:element name="confidence" type="phy:Confidence" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="width" type="xsd:double" minOccurs="0"/>
+         <xsd:element name="color" type="phy:BranchColor" minOccurs="0"/>
+         <xsd:element name="node_id" type="phy:Id" minOccurs="0"/>
+         <xsd:element name="taxonomy" type="phy:Taxonomy" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="sequence" type="phy:Sequence" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="events" type="phy:Events" minOccurs="0"/>
+         <xsd:element name="binary_characters" type="phy:BinaryCharacters" minOccurs="0"/>
+         <xsd:element name="geography" type="geo:Geography" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="date" type="phy:Date" minOccurs="0"/>
+         <xsd:element name="reference" type="phy:Reference" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="property" type="phy:Property" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="clade" type="phy:Clade" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" namespace="##other"/>
+      </xsd:sequence>
+      <xsd:attribute name="branch_length" type="xsd:double"/>
+      <xsd:attribute name="id_source" type="phy:id_source"/>
+   </xsd:complexType>
+  
+   <!-- Used to link elements together on the xml level:-->
+   <xsd:simpleType name="id_source">
+      <xsd:restriction base="xsd:ID"/>
+   </xsd:simpleType>
+   <xsd:simpleType name="id_ref">
+      <xsd:restriction base="xsd:IDREF"/>
+   </xsd:simpleType>
+</xsd:schema>
