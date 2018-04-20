@@ -5,7 +5,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        20-Sept-2017         
-##  Last modified:  20-Sept-2017        
+##  Last modified:  10-Apr-2018        
 ##
 ##  
 ##  
@@ -34,7 +34,7 @@ def MakeLossIndependentNode( node , LossIndex , lostSpecies = "", lostTS = None,
 
     Takes:
          - node (ReconciledTree): reconciled node where the *Loss event occurs
-         - LossIndex (int): index of the speciationLoss or speciationOutLoss event
+         - LossIndex (int): index of the speciationLoss or branchingOutLoss event
          - lostSpecies (str) [default = ""] : species of the loss
          - lostTS (int) [default = None]: timeSlice is the loss
          - lostAdditional [default = {}]: additional information to give to the new loss event

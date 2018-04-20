@@ -9,7 +9,7 @@ This file contains a class for reconciled trees
 Created the: 15-09-2017
 by: Wandrille Duchemin
 
-Last modified the: 18-09-2017
+Last modified the: 10-04-2018
 by: Wandrille Duchemin
 
 */
@@ -47,7 +47,7 @@ const int C     = 0; //Current (leaf)
 const int S     = 1; //Speciation (in the species tree)
 const int L     = 2; //Loss (in the species tree)
 const int D     = 3; //Duplication (in the species tree)
-const int Sout  = 4; //Speciation to an extinct/unsampled lineage (otherwise called SpeciationOut)
+const int Brout  = 4; //Transfer departure (otherwise called branchingOut)
 const int R     = 5; //Transfer reception
 const int N     = 6; //no event (to account for time slices)
 const int Bout  = 7; //Bifurcation in an extinct/unsampled lineage (otherwise called BifurcationOut)
@@ -191,7 +191,7 @@ public:
     bool isSpeciation(int evtcode);
     bool isLoss(int evtcode);
     bool isDup(int evtcode);
-    bool isSout(int evtcode);
+    bool isBrout(int evtcode);
     bool isRec(int evtcode);
     bool isNull(int evtcode);
     bool isBout(int evtcode);

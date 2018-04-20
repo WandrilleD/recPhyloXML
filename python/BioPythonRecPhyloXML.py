@@ -3,7 +3,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  #
 ##  Created:        25-August-2016      #
-##  Last modified:  20-sept-2017        #
+##  Last modified:  10-Apr-2018         #
 #########################################
 
 
@@ -135,7 +135,7 @@ class RecEvent(PhyloXML.PhyloElement):
     ok_tag = ['loss',
               'transferBack',
               'speciation',
-              'speciationOut',
+              'branchingOut',
               'bifurcationOut',
               'duplication',
               'leaf']

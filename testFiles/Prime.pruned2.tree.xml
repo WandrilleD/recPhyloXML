@@ -26,13 +26,13 @@
       <clade>
         <name>G25_17</name>
         <eventsRec>
-          <speciationOut speciesLocation="17"></speciationOut>
+          <branchingOut speciesLocation="17"></branchingOut>
         </eventsRec>
         <clade>
           <name>G7_9</name>
           <eventsRec>
             <transferBack destinationSpecies="9"></transferBack>
-            <speciationOut speciesLocation="9"></speciationOut>
+            <branchingOut speciesLocation="9"></branchingOut>
           </eventsRec>
           <clade>
             <name>G3_2</name>
@@ -44,7 +44,7 @@
           <clade>
             <name>G6_9</name>
             <eventsRec>
-              <speciationOut speciesLocation="9"></speciationOut>
+              <branchingOut speciesLocation="9"></branchingOut>
             </eventsRec>
             <clade>
               <name>G4_9</name>
@@ -69,13 +69,13 @@
           <clade>
             <name>G12_15</name>
             <eventsRec>
-              <speciationOut speciesLocation="15"></speciationOut>
+              <branchingOut speciesLocation="15"></branchingOut>
             </eventsRec>
             <clade>
               <name>G10_0</name>
               <eventsRec>
                 <transferBack destinationSpecies="0"></transferBack>
-                <speciationOut speciesLocation="0"></speciationOut>
+                <branchingOut speciesLocation="0"></branchingOut>
               </eventsRec>
               <clade>
                 <name>G8_0</name>
@@ -101,18 +101,18 @@
           <clade>
             <name>G23_16</name>
             <eventsRec>
-              <speciationOut speciesLocation="16"></speciationOut>
+              <branchingOut speciesLocation="16"></branchingOut>
             </eventsRec>
             <clade>
               <name>G17_16</name>
               <eventsRec>
-                <speciationOut speciesLocation="16"></speciationOut>
+                <branchingOut speciesLocation="16"></branchingOut>
               </eventsRec>
               <clade>
                 <name>G15_15</name>
                 <eventsRec>
                   <transferBack destinationSpecies="15"></transferBack>
-                  <speciationOut speciesLocation="15"></speciationOut>
+                  <branchingOut speciesLocation="15"></branchingOut>
                 </eventsRec>
                 <clade>
                   <name>G13_15</name>
@@ -139,7 +139,7 @@
               <name>G22_5</name>
               <eventsRec>
                 <transferBack destinationSpecies="5"></transferBack>
-                <speciationOut speciesLocation="5"></speciationOut>
+                <branchingOut speciesLocation="5"></branchingOut>
               </eventsRec>
               <clade>
                 <name>G18_5</name>
@@ -151,7 +151,7 @@
                 <name>G21_12</name>
                 <eventsRec>
                   <transferBack destinationSpecies="12"></transferBack>
-                  <speciationOut speciesLocation="12"></speciationOut>
+                  <branchingOut speciesLocation="12"></branchingOut>
                 </eventsRec>
                 <clade>
                   <name>G19_12</name>

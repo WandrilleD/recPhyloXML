@@ -4,7 +4,7 @@
 #########################################
 ##  Author:         Wandrille Duchemin  
 ##  Created:        23-Mar-2017         
-##  Last modified:  20-Sept-2017        
+##  Last modified:  10-Apr-2018        
 ##
 ##  Decribes functions to transform a reconciled tree in 
 ##  PrIME format into a tree in the recPhyloXML format
@@ -22,7 +22,7 @@ from ReconciledTree import RecEvent, ReconciledTree
 
 
 def setNodeAsXloss(node):
-    """ transform a S into a SL event, a So into a SoL, ... """
+    """ transform a S into a SL event, a bro into a broL, ... """
     node.getEvents()[0].eventCode += "L"
 
 def isXnode(node,X,i=0):
@@ -36,8 +36,8 @@ def isLossNode(node):
 
 
 def isTansferNode(node):
-    """ checks if the first event of the node is a LOSS """
-    return isXnode(node,"So")
+    """ checks if the first event of the node is a branchingOut """
+    return isXnode(node,"bro")
 
 
 def addTbEvent(node):
@@ -64,7 +64,7 @@ def PrIMEAnnotationToRecEvent(annot):
         elif Vtype == "Speciation":
             evtType = "S" ## may be a SL. we check this later as this info is in the child
         elif Vtype == "Transfer":
-            evtType = "So" ## we will have to add the transferBack later to the child
+            evtType = "bro" ## we will have to add the transferBack later to the child
         elif Vtype == "Loss":
             evtType = "L"
         elif Vtype == "Leaf":
@@ -255,8 +255,8 @@ def pruneReconciledTree(Rnode):
     for i , e in enumerate(evts):
         if e.eventCode == "DL":
             toPop.append(i)
-        elif e.eventCode == "SoL":
-            if e.species != evts[i+1].species: ## SoL with the transfered child deleted
+        elif e.eventCode == "broL":
+            if e.species != evts[i+1].species: ## broL with the transfered child deleted
                 toPop.append(i)
 
     for i in toPop[::-1]:

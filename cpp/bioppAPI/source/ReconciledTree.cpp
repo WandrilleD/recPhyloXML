@@ -6,7 +6,7 @@ This file contains a class for reconciled trees
 Created the: 15-09-2017
 by: Wandrille Duchemin
 
-Last modified the: 15-09-2017
+Last modified the: 10-04-2018
 by: Wandrille Duchemin
 
 */
@@ -127,7 +127,7 @@ void ReconciledTree::setNodeDetailsFromXMLLine(int Nodeid, string Tname, map <st
     S       --> Speciation (in the species tree)
     L       --> Loss (in the species tree)
     D       --> Duplication (in the species tree)
-    Sout    --> Speciation to an extinct/unsampled lineage (otherwise called SpeciationOut)
+    Brout    --> Speciation to an extinct/unsampled lineage (otherwise called SpeciationOut)
     R       --> Transfer reception
     N       --> no event (to account for time slices)
     Bout    --> Bifurcation in an extinct/unsampled lineage (otherwise called BifurcationOut)
@@ -145,9 +145,11 @@ void ReconciledTree::setNodeDetailsFromXMLLine(int Nodeid, string Tname, map <st
     {
         evtCode = S;
     }
-    else if(Tname.compare("speciationOut") == 0)
+    else if( (Tname.compare("branchingOut") == 0) || (Tname.compare("speciationOut") == 0) )
     {
-        evtCode = Sout;
+        if( Tname.compare("speciationOut") == 0 ) 
+            cerr << "deprecated " << Tname << " tag detected. auto-updated to branchingOut." <<endl;
+        evtCode = Brout;
     }
     else if(Tname.compare("bifurcationOut") == 0)
     {
@@ -162,10 +164,10 @@ void ReconciledTree::setNodeDetailsFromXMLLine(int Nodeid, string Tname, map <st
     {
         evtCode = R;
     }
-    else if(Tname.compare("speciationOutLoss") == 0)
+    else if( (Tname.compare("speciationOutLoss") == 0) || (Tname.compare("branchingOutLoss") == 0) )
     {
         cerr << "deprecated " << Tname << " tag detected. auto-updated to independent loss version." <<endl;
-        evtCode = Sout;
+        evtCode = Brout;
         //create some Loss son in the same species, with the same time slice
 
         int newId = getNextId();
@@ -536,7 +538,7 @@ string ReconciledTree::NodeString(int nodeid, bool hideLosses)
             case D :
                 Str += "Dup"; //Duplication (in the species tree)
                 break;
-            case Sout :
+            case Brout :
                 Str += "SpeOut"; //Speciation to an extinct/unsampled lineage (otherwise called SpeciationOut)
                 break;
             case R :
@@ -1483,9 +1485,9 @@ bool ReconciledTree::isDup(int evtcode)
     return true;
 }
 
-bool ReconciledTree::isSout(int evtcode)
+bool ReconciledTree::isBrout(int evtcode)
 {
-    if(evtcode != Sout)
+    if(evtcode != Brout)
         return false;
     return true;
 }
