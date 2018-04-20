@@ -19,19 +19,18 @@
    <!-- recSpeciesTree definition:-->
    <xsd:complexType name="Recspeciestreexml">
       <xsd:annotation>
-         <xsd:documentation> 'recSpeciesTree' is the name of the root element. recSpeciesTree contains an arbitrary number of 'phylogeny' elements (each representing one phylogeny) possibly followed by elements from other namespaces.
+         <xsd:documentation> 'recSpeciesTree' is the name of the root element. recSpeciesTree contains 1 'phylogeny' element, the species tree used to reconcile some gene trees.
          </xsd:documentation>
       </xsd:annotation>
       <xsd:sequence maxOccurs="unbounded">
-         <xsd:element name="phylogeny" type="phy:Phylogeny" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="phylogeny" type="phy:Phylogeny" minOccurs="1" maxOccurs="1"/>
          <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" namespace="##other"/>
       </xsd:sequence>
    </xsd:complexType>
    <!-- Phylogeny:-->
    <xsd:complexType name="Phylogeny">
       <xsd:annotation>
-         <xsd:documentation> Element Phylogeny is used to represent a phylogeny. The required attribute 'rooted' is used to indicate whether the phylogeny is rooted or not. The attribute 'rerootable' can be used to indicate that the phylogeny is not allowed to be rooted differently (i.e. because it is associated with root dependent data, such as gene duplications). The attribute 'type' can be used to indicate the type of phylogeny (i.e. 'gene tree'). It is recommended to use the attribute 'branch_length_unit' if the phylogeny has branch lengths. Element clade is used in a recursive manner to describe the topology of a phylogenetic.
-         tree.</xsd:documentation>
+         <xsd:documentation> Element Phylogeny is used to represent a phylogeny. The required attribute 'rooted' must be true (as a species tree associated with a reconciled tree is always rooted). It is recommended to use the attribute 'branch_length_unit' if the phylogeny has branch lengths. Element clade is used in a recursive manner to describe the topology of a phylogenetic.tree.
       </xsd:annotation>
       <xsd:sequence>
          <xsd:element name="name" type="xsd:token" minOccurs="0"/>
@@ -46,7 +45,6 @@
          <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" namespace="##other"/>
       </xsd:sequence>
       <xsd:attribute name="rooted" type="xsd:boolean" use="required"/>
-      <xsd:attribute name="rerootable" type="xsd:boolean"/>
       <xsd:attribute name="branch_length_unit" type="xsd:token"/>
       <xsd:attribute name="type" type="xsd:token"/>
    </xsd:complexType>
