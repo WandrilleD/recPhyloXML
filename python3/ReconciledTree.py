@@ -79,7 +79,7 @@ EVENTTAGCORRESPONDANCE = {    "D" : "duplication",
                         "L":"loss",
 
                         "Bo": "bifurcationOut",
-                        "bro": "branchingOut"
+                        "bro": "branchingOut",
                         "Tb": "transferBack",
 
                         "SL": "speciationLoss",
