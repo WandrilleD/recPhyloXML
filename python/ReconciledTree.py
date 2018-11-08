@@ -240,11 +240,20 @@ class ReconciledTree(ete3.TreeNode):
     def getTreeNewick(self, sep="|" , topoOnly = False):
         return self.getTreeNewickAux(sep, topoOnly) + ";"
 
-    def getTreeRecPhyloXMLAux(self , speciesNames ={}, topoOnly = False):
-
+    def getTreeRecPhyloXMLAux(self , speciesNames ={}, topoOnly = False, featuresToPrint = {}):
+        
         L = []
         L.append("<clade>")
         L.append("  <name>" + str(self.name) + "</name>" )
+
+        for k in self.features:
+            if featuresToPrint.has_key(k):
+                L.append("  <"+str(featuresToPrint[k])+">" + str( getattr(self,k) ) + "</"+str(featuresToPrint[k])+">" )
+            elif k == 'dist':
+                L.append("  <branch_length>" + str( getattr(self,k) ) + "</branch_length>" )
+            elif k == 'support':
+                L.append("  <confidence>" + str( getattr(self,k) ) + "</confidence>" )
+
         if not topoOnly:
             L.append("  <eventsRec>")
             for e in self.eventRecs:
@@ -255,20 +264,20 @@ class ReconciledTree(ete3.TreeNode):
             L.append("  </eventsRec>")
         ChL = []
         for c in self.get_children():
-            ChL += ["  " + s for s in c.getTreeRecPhyloXMLAux(speciesNames, topoOnly)]
+            ChL += ["  " + s for s in c.getTreeRecPhyloXMLAux(speciesNames, topoOnly, featuresToPrint)]
         if len(ChL)>0:
             L += ChL
         L.append("</clade>")
         return L
 
-    def getTreeRecPhyloXML(self , speciesNames ={}, topoOnly = False):
-        Lines = self.getTreeRecPhyloXMLLines( speciesNames, topoOnly)        
+    def getTreeRecPhyloXML(self , speciesNames ={}, topoOnly = False, featuresToPrint = {}):
+        Lines = self.getTreeRecPhyloXMLLines( speciesNames, topoOnly , featuresToPrint )        
         return "\n".join(Lines)
 
-    def getTreeRecPhyloXMLLines(self , speciesNames ={}, topoOnly = False):
+    def getTreeRecPhyloXMLLines(self , speciesNames ={}, topoOnly = False,featuresToPrint = {}):
         Lines = ["<recGeneTree>"]
         Lines.append("  <phylogeny rooted=\"true\">")
-        tmp = self.getTreeRecPhyloXMLAux( speciesNames , topoOnly )
+        tmp = self.getTreeRecPhyloXMLAux( speciesNames , topoOnly, featuresToPrint )
         for l in tmp:
             Lines.append( "    " + l )
         Lines.append("  </phylogeny>")
@@ -512,7 +521,7 @@ class ReconciledTreeList:
         """
         return not self.spTree is None
 
-    def getRecPhyloXMLLines(self):
+    def getRecPhyloXMLLines(self ,featuresToPrint={} ):
         """
         Returns:
             (list) : list of lines of the recPhyloXML representation of this object
@@ -535,7 +544,7 @@ class ReconciledTreeList:
 
 
         for RT in self.recTrees:
-            recLines = RT.getTreeRecPhyloXMLLines()
+            recLines = RT.getTreeRecPhyloXMLLines(featuresToPrint=featuresToPrint)
             for l in recLines:
                 lines.append( offsetChar*offset + l )
 

@@ -344,6 +344,12 @@ class recPhyloXML_parser:
         for ch in childrenNodes:
             node.add_child( ch )
     
+        if additionnalInfo.has_key("branch_length"):
+            node.dist = float(additionnalInfo.pop("branch_length").text)
+        if additionnalInfo.has_key("confidence"):
+            node.support = float(additionnalInfo.pop("confidence").text )
+
+
         if len(additionnalInfo) > 0:
             node.add_features( **additionnalInfo )
     
