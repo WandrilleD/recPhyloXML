@@ -220,15 +220,30 @@ class ReconciledTree(ete3.TreeNode):
         return "\n".join(self.getTreeStrAux())
 
     def getTreeNewickAux(self, sep="|", topoOnly = False):
+
+        if topoOnly:
+            Loss = False
+            for evt in self.eventRecs:
+                if evt.eventCode in ["L",EVENTTAGCORRESPONDANCE["L"]]:
+                    Loss = True
+            if Loss :
+                return None
+
         s = ""
 
         ChL = []
         for c in self.get_children():
-            ChL.append(c.getTreeNewickAux(sep,topoOnly))
-        if len(ChL)>0:
+            X = c.getTreeNewickAux(sep,topoOnly)
+            if not X is None:
+                ChL.append(X)
+
+        parenthesisLim = 0 + topoOnly 
+        if len(ChL)>parenthesisLim:
             s += "("
             s += ",".join(ChL)
             s += ")"
+        elif len(ChL)==1:
+            return ChL[0]
 
         s += str(self.name)
         if not topoOnly:
