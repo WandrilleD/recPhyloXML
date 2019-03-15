@@ -388,7 +388,7 @@ def ConvertRTtoLossIndepVersion(RT , speciesTree = None, keptChildNameSuffix = "
 
             lostTS = e.timeSlice
             if not lostTS is None:
-                lostTS += 1
+                lostTS -= 1
 
             MakeLossIndependentNode( RT , i , lostSpecies = species, lostTS = lostTS, keptChildNameSuffix = keptChildNameSuffix)
 
@@ -410,7 +410,7 @@ def MakeLossIndependentNode( node , LossIndex , lostSpecies = "", lostTS = None,
          - keptChildNameSuffix (str) [default = ".c"] : suffix to add to the name of the new child of node that is NOT a loss
     """
 
-
+    print( MakeLossIndependentNode , node , lostTS )
 
     # 1. create the loss child
 

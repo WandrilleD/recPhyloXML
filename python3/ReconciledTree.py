@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 #########################################
-##  Author:         Wandrille Duchemin
+##  Author:         Bastien Boussau , Wandrille Duchemin
 ##  Created:        13-Jan-2017
-##  Last modified:  10-Apr-2018
+##  Last modified:  15-Mar-2019
 ##
 ##  Decribes 3 classes : RecEvent, ReconciledTree and ReconciledTreeList
 ##  the ReconciledTree class represent a reconciled gene tree and
@@ -15,7 +15,7 @@
 ##  requires : ete3 ( http://etetoolkit.org/ )
 ##             xml ( in standard library )
 ##
-##  developped for python2.7
+##  developped for python3.0
 ##
 #########################################
 
@@ -79,7 +79,7 @@ EVENTTAGCORRESPONDANCE = {    "D" : "duplication",
                         "L":"loss",
 
                         "Bo": "bifurcationOut",
-                        "bro": "branchingOut"
+                        "bro": "branchingOut",
                         "Tb": "transferBack",
 
                         "SL": "speciationLoss",
