@@ -442,7 +442,7 @@ if __name__ == "__main__":
 #    RTL = parser.parse(fileName)
 #    print RTL.spTree
 
-    fileName = "testFiles/lossSeparatedtestFile"
+    #fileName = "testFiles/lossSeparatedtestFile"
 
     RTL = parser.parse(fileName)
 

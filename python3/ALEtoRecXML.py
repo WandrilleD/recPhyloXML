@@ -87,7 +87,7 @@ def parse_node_annotation(node_annotation, isLeaf = False, isDead = False, isUnd
     Returns:
         (list): list of dicts coding a particular event
     """
-    #print "annot : ",node_annotation
+    #print("annot : ",node_annotation , isUndated)
 
     l_events = []
 
@@ -111,9 +111,10 @@ def parse_node_annotation(node_annotation, isLeaf = False, isDead = False, isUnd
             for a in new_anns[2:]:##for each transfer after that (should be only one)
                 s_ann.append("@" + a)
 
-        print (node_annotation, "->", s_ann)
 
         for ann in s_ann:
+            if len(ann) == 0:
+                raise Exception( "empty annotation" )
 
             if ann[0].isdigit(): ##starts with a number spe,dup or spe+loss
                 if ann.isdigit(): ##only numbers: spe or spe+loss
@@ -127,11 +128,13 @@ def parse_node_annotation(node_annotation, isLeaf = False, isDead = False, isUnd
                     l_events.append( RecEvent( "S" , target , ts ) )
                     continue
 
+
             if ann.startswith("T@"): ##Transfer out
 
                 ## time slice of the source
                 source_ts = None
                 source_sp = None
+
                 if isUndated:
                     ## of the shape : "T@D->A"
                     source_sp = ann[2:].partition("->")[0]
@@ -213,20 +216,20 @@ def separateLeafNameFromLeafAnnotation( leafName , sepSp = "_" , sepAnnot = ("."
 
     """
 
-    #print leafName,
+    spName, j , gNameAndAnnot = leafName.partition( sepSp )
 
     x = 0
     AnnotFound = False
 
-    while (not AnnotFound) and (x < len(leafName)):
+    while (not AnnotFound) and (x < len(gNameAndAnnot)):
 
-        if leafName[x] in sepAnnot:
+        if gNameAndAnnot[x] in sepAnnot:
             AnnotFound=True
             break
 
         x+=1
     #print "->", leafName[:x] , leafName[x:]
-    return leafName[:x] , leafName[x:]
+    return spName + sepSp + gNameAndAnnot[:x] , gNameAndAnnot[x:]
 
 
 def getLeafSpeciesFromLeafName(leafName, sepSp = "_"):
@@ -238,14 +241,11 @@ def getLeafSpeciesFromLeafName(leafName, sepSp = "_"):
     Returns:
         (str) : species name
     """
-    for i,c in enumerate(leafName):
-        if c in [sepSp , "." , "@"]:
-            return leafName[:i]
 
     return leafName.partition(sepSp)[0]
 
 
-def ALEtreeToReconciledTree(ALEtree, isDead = False, isUndated = False):
+def ALEtreeToReconciledTree(ALEtree, isDead = False, isUndated = False , sepSp = "_"):
     """
     Recursively builds the reconciled tree
 
@@ -262,19 +262,20 @@ def ALEtreeToReconciledTree(ALEtree, isDead = False, isUndated = False):
     annotation = None
     name = ALEtree.name
     if isLeaf:
-        name , annotation = separateLeafNameFromLeafAnnotation(ALEtree.name)
+        name , annotation = separateLeafNameFromLeafAnnotation(ALEtree.name, sepSp=sepSp)
+        #print("leaf parsing :", name , annotation)
     else:
         annotation = ALEtree.name
 
     #print "name : ",ALEtree.name
 
-    events = parse_node_annotation(annotation, isLeaf, isDead = isDead, isUndated = isUndated)
+    events = parse_node_annotation(annotation, isLeaf, isDead = isDead, isUndated = isUndated )
 
 
 
     if isLeaf:
         ## we specify the species of the leaf event
-        events[-1].species = getLeafSpeciesFromLeafName( ALEtree.name )
+        events[-1].species = getLeafSpeciesFromLeafName( ALEtree.name , sepSp=sepSp )
 
     #print [str(e) for e in events]
 
@@ -298,7 +299,7 @@ def ALEtreeToReconciledTree(ALEtree, isDead = False, isUndated = False):
         current.addEvent(e)
 
     for c in ALEtree.children: ##recursion on successors
-        current.add_child( ALEtreeToReconciledTree(c, isDead , isUndated) )
+        current.add_child( ALEtreeToReconciledTree(c, isDead , isUndated , sepSp=sepSp) )
 
     return RT
 
@@ -410,7 +411,7 @@ def MakeLossIndependentNode( node , LossIndex , lostSpecies = "", lostTS = None,
          - keptChildNameSuffix (str) [default = ".c"] : suffix to add to the name of the new child of node that is NOT a loss
     """
 
-    print( MakeLossIndependentNode , node , lostTS )
+    #print( MakeLossIndependentNode , node , lostTS )
 
     # 1. create the loss child
 
@@ -466,9 +467,10 @@ if __name__ == "__main__":
                 Given a file containing reconciled trees in ALE reconciled tree format,
                 this script writes the trees in recPhyloXML format.
 
-                usage : python ALEtoRecPhyloXML.py -g geneFileIn [-o fileOut]
+                usage : python ALEtoRecPhyloXML.py -g geneFileIn [-o fileOut -s separator]
                             -g geneFileIn       : name of the file containing NHX reconciliations
                             -o fileOut          : (optional) name of the output file (default is geneFileIn + ".xml" )
+                            -s separator        : (optional) separator between species and gene name (default: "_")
 
                """
 #                            (TODO:)
@@ -482,9 +484,8 @@ if __name__ == "__main__":
     nextKEY = None
     params = {
                             "-g"    : None ,#name of the file containing NHX reconciliations
-                            "-o"    : None #(optional) name of the output file (default is geneFileIn + ".xml" )
-#                            "-s"    : None ,#name of the species tree file
-#                            "--include.species"   : False #(optional) whether the species tree should be included in the XML file (using the <spTree> tag)
+                            "-o"    : None, #(optional) name of the output file (default is geneFileIn + ".xml" )
+                            "-s"    : "_" #sepparator
             }
 
     flagArgs = ["--include.species"]
@@ -575,8 +576,28 @@ if __name__ == "__main__":
 
                 ALEtree = Tree( l, format = 1 )
 
+                while True:
 
-                RT = ALEtreeToReconciledTree(ALEtree, isUndated = isUndated)
+                    try:
+                        RT = ALEtreeToReconciledTree(ALEtree, isUndated = isUndated , sepSp= params["-s"])
+                    except ValueError as v:
+                        if not isUndated:
+                            print("encountered ValueError. Trying to read in undated format.")
+                            isUndated = True
+                        else:
+                            print("encountered ValueError even when trying to read in undated format.")
+                            print("error: {0}".format(v))
+                            print("abort.")
+                            exit(1)
+                    except Exception as e:
+                        print("encountered error: {0}".format(e))
+                        print("this may be due to an incorrect separator between species and gene id.")
+                        print("current separator: '"+params["-s"]+"'. You can change it using option -s.")
+                        exit(1)
+                    else:
+                        print("Reconciled tree successfuly read.")
+                        break
+
 
                 if isUndated:
                     refineReconciledTreeWithTransferBack(RT)
