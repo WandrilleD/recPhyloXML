@@ -1,0 +1,148 @@
+<recPhylo>
+  <spTree>
+    <phylogeny>
+      <clade>
+        <name>n4</name>
+        <clade>
+          <name>n2</name>
+          <clade>
+            <name>C</name>
+          </clade>
+          <clade>
+            <name>B</name>
+          </clade>
+        </clade>
+        <clade>
+          <name>A</name>
+        </clade>
+      </clade>
+    </phylogeny>
+  </spTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <clade>
+        <name>n130</name>
+        <confidence>1.0</confidence>
+        <branch_length>1.0</branch_length>
+        <eventsRec>
+          <speciation speciesLocation="n4"></speciation>
+        </eventsRec>
+        <clade>
+          <name>n124</name>
+          <confidence>1.0</confidence>
+          <branch_length>1.0</branch_length>
+          <eventsRec>
+            <speciation speciesLocation="n2"></speciation>
+          </eventsRec>
+          <clade>
+            <name>n120</name>
+            <confidence>1.0</confidence>
+            <branch_length>1.0</branch_length>
+            <eventsRec>
+              <branchingOut speciesLocation="B"></branchingOut>
+            </eventsRec>
+            <clade>
+              <name>n118</name>
+              <confidence>1.0</confidence>
+              <branch_length>1.0</branch_length>
+              <eventsRec>
+                <transferBack destinationSpecies="A"></transferBack>
+                <duplication speciesLocation="A"></duplication>
+              </eventsRec>
+              <clade>
+                <name>a2_A</name>
+                <confidence>1.0</confidence>
+                <branch_length>1.0</branch_length>
+                <eventsRec>
+                  <leaf speciesLocation="A" geneName="a2_A"></leaf>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>a1_A</name>
+                <confidence>1.0</confidence>
+                <branch_length>1.0</branch_length>
+                <eventsRec>
+                  <leaf speciesLocation="A" geneName="a1_A"></leaf>
+                </eventsRec>
+              </clade>
+            </clade>
+            <clade>
+              <name>b1_B</name>
+              <confidence>1.0</confidence>
+              <branch_length>1.0</branch_length>
+              <eventsRec>
+                <leaf speciesLocation="B" geneName="b1_B"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>n123</name>
+            <confidence>1.0</confidence>
+            <branch_length>1.0</branch_length>
+            <eventsRec>
+              <branchingOut speciesLocation="C"></branchingOut>
+            </eventsRec>
+            <clade>
+              <name>c1_C</name>
+              <confidence>1.0</confidence>
+              <branch_length>1.0</branch_length>
+              <eventsRec>
+                <leaf speciesLocation="C" geneName="c1_C"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>a3_A</name>
+              <confidence>1.0</confidence>
+              <branch_length>1.0</branch_length>
+              <eventsRec>
+                <transferBack destinationSpecies="A"></transferBack>
+                <leaf speciesLocation="A" geneName="a3_A"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>n129</name>
+          <confidence>1.0</confidence>
+          <branch_length>1.0</branch_length>
+          <eventsRec>
+            <branchingOut speciesLocation="A"></branchingOut>
+          </eventsRec>
+          <clade>
+            <name>n127</name>
+            <confidence>1.0</confidence>
+            <branch_length>1.0</branch_length>
+            <eventsRec>
+              <transferBack destinationSpecies="n2"></transferBack>
+              <speciation speciesLocation="n2"></speciation>
+            </eventsRec>
+            <clade>
+              <name>c2_C</name>
+              <confidence>1.0</confidence>
+              <branch_length>1.0</branch_length>
+              <eventsRec>
+                <leaf speciesLocation="C" geneName="c2_C"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>b2_B</name>
+              <confidence>1.0</confidence>
+              <branch_length>1.0</branch_length>
+              <eventsRec>
+                <leaf speciesLocation="B" geneName="b2_B"></leaf>
+              </eventsRec>
+            </clade>
+          </clade>
+          <clade>
+            <name>a4_A</name>
+            <confidence>1.0</confidence>
+            <branch_length>1.0</branch_length>
+            <eventsRec>
+              <leaf speciesLocation="A" geneName="a4_A"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+</recPhylo>

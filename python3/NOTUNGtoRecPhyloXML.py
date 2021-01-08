@@ -12,7 +12,7 @@
 ##  requires : ete3 ( http://etetoolkit.org/ )
 ##             ReconciledTree , and ete3-based representation of a reconciled tree
 ## 
-##  developped for python2.7
+##  developped for python3.7
 ##
 #########################################
 
@@ -139,7 +139,7 @@ def NotungAnnotationToRecEvent(annot):
         events.append( RecEvent(evtType,sp) )
 
     if ( sp is None ) or (evtType is None):
-        print "error when trying to assign event. data:", annot 
+        print( "error when trying to assign event. data:", annot )
         return None
     return events #RecEvent(evtType,sp)
 
@@ -194,7 +194,7 @@ def read_leaf(s):
 def readNotungParenthesis(s):
     
     if not s.startswith("("):
-        print "error, should begin with a parenthesis" 
+        print( "error, should begin with a parenthesis" )
         return
 
     i = 1    
@@ -324,7 +324,7 @@ if __name__ == "__main__":
 
         if not nextKEY is None:
             params[nextKEY] = sys.argv[i]
-            print "argument ",nextKEY,":", sys.argv[i] 
+            print( "argument ",nextKEY,":", sys.argv[i] )
             nextKEY = None
             continue
 
@@ -332,22 +332,22 @@ if __name__ == "__main__":
 
             if sys.argv[i] in flagArgs:
                 params[sys.argv[i]] = True
-                print sys.argv[i],"flag activated" 
+                print( sys.argv[i],"flag activated" )
             else:
                 nextKEY = sys.argv[i]
             continue
         else:
-            print "unknown argument", sys.argv[i] 
+            print( "unknown argument", sys.argv[i] )
 
 
     if params["-g"] is None:
         OK = False
-        print "error: gene input file not given." 
+        print( "error: gene input file not given." )
 
 
 
     if not OK:
-        print help 
+        print( help )
         exit(1)
 
 
@@ -413,4 +413,4 @@ if __name__ == "__main__":
 
     OUT.close()
 
-    print "reconciled tree converted and written." 
+    print( "reconciled tree converted and written." )
